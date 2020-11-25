@@ -16,7 +16,7 @@ OPTION(MAKE_WOLFENSTEIN "Make Wolfenstein3D raycasting application" ON)
 OPTION(MAKE_COLLISION "Make Collision application" ON)
 OPTION(MAKE_DEBUGDRAW "Make DebugDraw application" ON)
 OPTION(MAKE_RAYCAST "Make Raycast application" ON)
-OPTION(MAKE_MATRIXPIXEL "Make MatrixPixel application" OFF)
+OPTION(MAKE_MATRIXPIXEL "Make MatrixPixel application" ON)
 
 OPTION(USE_RS232 "Use RS232 library" OFF)
 OPTION(MAKE_SERIAL "Make serial application" OFF)
