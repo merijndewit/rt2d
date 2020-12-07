@@ -6,23 +6,21 @@
  * @brief description of MyScene behavior.
  */
 
-#ifndef MYSCENE_H
-#define MYSCENE_H
+#ifndef SPACESHIP_H
+#define SPACESHIP_H
 
 #include <rt2d/scene.h>
 
 #include "myentity.h"
-#include "spaceship.h"
-#include "spaceship.cpp"
 
  /// @brief The MyScene class is the Scene implementation.
-class MyScene : public Scene
+class SpaceShip : public Scene
 {
 public:
 	/// @brief Constructor
-	MyScene();
+	SpaceShip();
 	/// @brief Destructor
-	virtual ~MyScene();
+	virtual ~SpaceShip();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
@@ -35,7 +33,7 @@ private:
 	MyEntity* spaceship;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
-	
+	void updateSpaceShip(float deltaTime);
 };
 
 #endif /* SCENE00_H */
