@@ -1,20 +1,18 @@
 /**
  * Copyright 2015 Your Name <you@yourhost.com>
  *
- * @file myscene.h
+ * @file myentity.h
  *
- * @brief description of MyScene behavior.
+ * @brief description of MyEntity behavior.
  */
 
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
-#include <rt2d/scene.h>
+#include <rt2d/entity.h>
 
-#include "myentity.h"
-
- /// @brief The MyScene class is the Scene implementation.
-class SpaceShip : public Scene
+/// @brief The MyEntity class is the Entity implementation.
+class SpaceShip : public Entity
 {
 public:
 	/// @brief Constructor
@@ -28,12 +26,8 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	/// @brief the rotating square in the middle of the screen
-	MyEntity* myentity;
-	MyEntity* spaceship;
-	/// @brief a Timer to rotate the color every n seconds
-	Timer t;
-	void updateSpaceShip(float deltaTime);
+	SpaceShip* spaceship;
+	
 };
 
-#endif /* SCENE00_H */
+#endif /* SPACESHIP_H */

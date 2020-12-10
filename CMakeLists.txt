@@ -154,14 +154,11 @@ file(
 IF(MAKE_START)
 	add_executable(start
 		start/main.cpp
-		start/myentity.cpp
-		start/myentity.h
-		start/myscene.cpp
-		start/myscene.h
 		start/spaceship.cpp
 		start/spaceship.h
-		start/bullet.cpp
-		start/bullet.h
+		start/myscene.cpp
+		start/myscene.h
+		
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}
