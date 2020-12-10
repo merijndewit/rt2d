@@ -8,7 +8,17 @@
 
 SpaceShip::SpaceShip() : Entity()
 {
+	Line* tmp = new Line();
+	tmp->addPoint(-10.0f, -10.0f);
+	tmp->addPoint(20.0f, 0.0f);
+	tmp->addPoint(-10.0f, 10.0f);
+	tmp->addPoint(-10.0f, -10.0f);
 
+	//Create a BasicEntity as our spaceship.
+	
+	this->addLine(tmp);
+	this->position = Point2(SWIDTH / 2, SHEIGHT / 2);
+	delete tmp; // delete when you're done with it.
 }
 
 SpaceShip::~SpaceShip()

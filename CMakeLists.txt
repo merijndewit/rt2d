@@ -158,7 +158,8 @@ IF(MAKE_START)
 		start/spaceship.h
 		start/myscene.cpp
 		start/myscene.h
-		
+		start/bullet.cpp
+		start/bullet.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}
