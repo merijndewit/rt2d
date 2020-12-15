@@ -3,11 +3,22 @@
  *
  * Copyright 2015 Your Name <you@yourhost.com>
  */
-
+#include <iostream>
+#include <vector>
 #include "spaceship.h"
+#include "myscene.h"
+
+int spacex;
+int spacey;
+int spacer;
+
+std::vector<int>Position;
+
 
 SpaceShip::SpaceShip() : Entity()
 {
+	
+	
 	Line* tmp = new Line();
 	tmp->addPoint(-10.0f, -10.0f);
 	tmp->addPoint(20.0f, 0.0f);
@@ -19,6 +30,8 @@ SpaceShip::SpaceShip() : Entity()
 	this->addLine(tmp);
 	this->position = Point2(SWIDTH / 2, SHEIGHT / 2);
 	delete tmp; // delete when you're done with it.
+	
+	
 }
 
 SpaceShip::~SpaceShip()
@@ -28,7 +41,8 @@ SpaceShip::~SpaceShip()
 
 void SpaceShip::update(float deltaTime)
 {
-	this->line()->color = WHITE;
+	
+	this->line()->color = BLUE;
 
 	float rotspeed = 3.14f;
 
@@ -53,5 +67,9 @@ void SpaceShip::update(float deltaTime)
 	if (this->position.x > SWIDTH) { this->position.x = 0; }
 	if (this->position.y < 0) { this->position.y = SHEIGHT; }
 	if (this->position.y > SHEIGHT) { this->position.y = 0; }
-
+	spacex = this->position.x;
+	spacey = this->position.y;
+	spacer = this->rotation.z;
+	
+	
 }

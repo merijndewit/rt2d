@@ -6,37 +6,28 @@
  * @brief description of MyEntity behavior.
  */
 
-#ifndef SPACESHIP_H
-#define SPACESHIP_H
+#ifndef BULLET_H
+#define BULLET_H
 
 #include <rt2d/entity.h>
 
 /// @brief The MyEntity class is the Entity implementation.
-
-
-extern int spacex;
-extern int spacey;
-extern int spacer;
-class SpaceShip : public Entity
+class Bullet : public Entity
 {
-	
-
 public:
 	/// @brief Constructor
-	SpaceShip();
+	Bullet();
 	/// @brief Destructor
-	virtual ~SpaceShip();
+	virtual ~Bullet();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
-	
 
 private:
-	SpaceShip* spaceship;
-	
+	Bullet* bullet;
 	
 };
 
-#endif /* SPACESHIP_H */
+#endif /* BULLET_H */

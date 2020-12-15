@@ -9,6 +9,7 @@
 #include <time.h>
 
 #include "myscene.h"
+#include "bullet.h"
 
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
@@ -18,8 +19,17 @@ MyScene::MyScene() : Scene()
 	t.start();
 
 	spaceship = new SpaceShip();
-	
+	bullet = new Bullet();
+
 	this->addChild(spaceship);
+	
+	
+	for (size_t i = 0; i < 15; i++)
+	{
+		this->addChild(bullet);
+		std::cout << "added bullet";
+	}
+
 }
 
 
@@ -29,7 +39,6 @@ MyScene::~MyScene()
 	
 	this->removeChild(spaceship);
 
-	// delete myentity from the heap (there was a 'new' in the constructor)
 	
 	delete spaceship;
 }
@@ -43,15 +52,7 @@ void MyScene::update(float deltaTime)
 		this->stop();
 	}
 
-	// ###############################################################
-	// Spacebar scales myentity
-	// ###############################################################
-	if (input()->getKeyDown(KeyCode::Space)) {
-		spaceship->scale = Point(0.5f, 0.5f);
-	}
-	if (input()->getKeyUp(KeyCode::Space)) {
-		spaceship->scale = Point(1.0f, 1.0f);
-	}
+
 
 
 	this->updateSpaceShip(deltaTime);
@@ -60,3 +61,4 @@ void MyScene::updateSpaceShip(float deltaTime)
 {
 
 }
+
