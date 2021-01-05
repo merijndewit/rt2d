@@ -85,10 +85,26 @@ void SpaceShip::update(float deltaTime)
 	this->rotation.z = polar.angle;
 	//this->position += velocity * deltaTime;
 
-	if (this->position.x < 0) { this->position.x = SWIDTH; }
-	if (this->position.x > SWIDTH) { this->position.x = 0; }
-	if (this->position.y < 0) { this->position.y = SHEIGHT; }
-	if (this->position.y > SHEIGHT) { this->position.y = 0; }
+	if (this->position.x < 0)
+	{ 
+		this->position.x = 0; 
+		this->Acceleration->x = 0;
+	}
+	if (this->position.x > SWIDTH)
+	{ 
+		this->position.x = SWIDTH;
+		this->Acceleration->x = 0;
+	}
+	if (this->position.y < 0) 
+	{ 
+		this->position.y = 0; 
+		this->Acceleration->y = 0;
+	}
+	if (this->position.y > SHEIGHT) 
+	{ 
+		this->Acceleration->y = 0;
+		this->position.y = SHEIGHT;
+	}
 	spacex = this->position.x;
 	spacey = this->position.y;
 	spacer = this->rotation.z;
