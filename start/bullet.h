@@ -25,6 +25,13 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 
+	Bullet* spaceship;
+	Vector2* Acceleration;
+	Vector2* Velocity;
+	Vector2* Position;
+	Vector2* Force;
+	float heading;
+
 private:
 
 };

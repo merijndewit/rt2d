@@ -14,9 +14,11 @@
 /// @brief The MyEntity class is the Entity implementation.
 
 
-extern int spacex;
-extern int spacey;
-extern int spacer;
+extern float spacex;
+extern float spacey;
+extern float spacer;
+
+
 class SpaceShip : public Entity
 {
 	

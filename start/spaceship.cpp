@@ -10,9 +10,11 @@
 #include "spaceship.h"
 #include "myscene.h"
 
-int spacex;
-int spacey;
-int spacer;
+float spacex;
+float spacey;
+float spacer;
+float spaceV;
+float spaceVy;
 
 
 
@@ -20,11 +22,11 @@ int spacer;
 SpaceShip::SpaceShip() : Entity()
 {
 	//movement ship
-	Position = new Vector2(SWIDTH/2,SHEIGHT/2);
+	Position = new Vector2(SWIDTH / 2, SHEIGHT / 2);
 	Velocity = new Vector2(0.0f, 0.0f);
 	Acceleration = new Vector2(0, -3);
 	heading = 0;
-	
+
 	Line* tmp = new Line();
 	tmp->addPoint(-10.0f, -10.0f);
 	tmp->addPoint(20.0f, 0.0f);
@@ -32,12 +34,12 @@ SpaceShip::SpaceShip() : Entity()
 	tmp->addPoint(-10.0f, -10.0f);
 
 	//Create a BasicEntity as our spaceship.
-	
+
 	this->addLine(tmp);
 	this->position = Point2(SWIDTH / 2, SHEIGHT / 2);
 	delete tmp; // delete when you're done with it.
-	
-	
+
+
 }
 
 SpaceShip::~SpaceShip()
@@ -49,15 +51,9 @@ void SpaceShip::update(float deltaTime)
 {
 	this->position.x += this->Acceleration->x;
 	this->position.y += this->Acceleration->y;
-	//this->Velocity->x * 0.8;
-	//this->Velocity->y * 0.8;
-	//this->position.x += this->Velocity->x * 0.99;
-	//this->position.y += this->Velocity->y * 0.99;
-	//this->Acceleration->x * 0;
-	//this->Acceleration->y * 0;
 	this->position.x += Velocity->x;
 	this->position.y += Velocity->y;
-
+	
 
 	this->line()->color = BLUE;
 
@@ -68,7 +64,7 @@ void SpaceShip::update(float deltaTime)
 
 	if (input()->getKey(KeyCode::Up)) {
 		this->line()->color = RED;
-		
+
 		float angle = heading - PI / 2;
 		// Polar to cartesian for force vector!
 		Force = new Vector2(cos(polar.angle), sin(polar.angle));
@@ -86,22 +82,22 @@ void SpaceShip::update(float deltaTime)
 	//this->position += velocity * deltaTime;
 
 	if (this->position.x < 0)
-	{ 
-		this->position.x = 0; 
+	{
+		this->position.x = 0;
 		this->Acceleration->x = 0;
 	}
 	if (this->position.x > SWIDTH)
-	{ 
+	{
 		this->position.x = SWIDTH;
 		this->Acceleration->x = 0;
 	}
-	if (this->position.y < 0) 
-	{ 
-		this->position.y = 0; 
+	if (this->position.y < 0)
+	{
+		this->position.y = 0;
 		this->Acceleration->y = 0;
 	}
-	if (this->position.y > SHEIGHT) 
-	{ 
+	if (this->position.y > SHEIGHT)
+	{
 		this->Acceleration->y = 0;
 		this->position.y = SHEIGHT;
 	}
@@ -109,6 +105,6 @@ void SpaceShip::update(float deltaTime)
 	spacey = this->position.y;
 	spacer = this->rotation.z;
 	
-	
-	
+
+
 }
