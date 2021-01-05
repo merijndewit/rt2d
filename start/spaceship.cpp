@@ -47,7 +47,18 @@ SpaceShip::~SpaceShip()
 
 void SpaceShip::update(float deltaTime)
 {
-	
+	this->position.x += this->Acceleration->x;
+	this->position.y += this->Acceleration->y;
+	//this->Velocity->x * 0.8;
+	//this->Velocity->y * 0.8;
+	//this->position.x += this->Velocity->x * 0.99;
+	//this->position.y += this->Velocity->y * 0.99;
+	//this->Acceleration->x * 0;
+	//this->Acceleration->y * 0;
+	this->position.x += Velocity->x;
+	this->position.y += Velocity->y;
+
+
 	this->line()->color = BLUE;
 
 	float rotspeed = 3.14f;
@@ -61,9 +72,8 @@ void SpaceShip::update(float deltaTime)
 		float angle = heading - PI / 2;
 		// Polar to cartesian for force vector!
 		Force = new Vector2(cos(polar.angle), sin(polar.angle));
-		this->position.y += this->Velocity->y = Force->y * 100 * deltaTime;
-
-		this->position.x += this->Velocity->x = Force->x * 100 * deltaTime;
+		this->Acceleration->y += Force->y * 0.2;
+		this->Acceleration->x += Force->x * 0.2;
 	}
 	if (input()->getKey(KeyCode::Right)) {
 		polar.angle += rotspeed * deltaTime; // rotate right
