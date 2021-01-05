@@ -32,11 +32,15 @@ public:
 	/// @return void
 	virtual void update(float deltaTime);
 	
+	SpaceShip* spaceship;
+	Vector2* Acceleration;
+	Vector2* Velocity;
+	Vector2* Position;
+	Vector2* Force;
+	float heading;
 
 private:
-	SpaceShip* spaceship;
-	
-	
+
 };
 
 #endif /* SPACESHIP_H */

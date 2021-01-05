@@ -26,8 +26,7 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	Bullet* bullet;
-	
+
 };
 
 #endif /* BULLET_H */
