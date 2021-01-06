@@ -68,5 +68,14 @@ void Ufo::update(float deltaTime)
 
 	this->line()->color = RED;
 
+	if (spacex <= SWIDTH / 4.5 && spacey <= SHEIGHT / 4.5)
+	{
+		this->position = Point2(SWIDTH / 1.1, SHEIGHT / 1.1);
+	}
+	if (spacex >= SWIDTH / 1.2 && spacey >= SHEIGHT / 1.2)
+	{
+		this->position = Point2(SWIDTH / 8, SHEIGHT / 8);
+	}
+
 
 }
