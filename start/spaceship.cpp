@@ -67,8 +67,8 @@ void SpaceShip::update(float deltaTime)
 		float angle = heading - PI / 2;
 		// Polar to cartesian for force vector!
 		Force = new Vector2(cos(polar.angle), sin(polar.angle));
-		this->Acceleration->y += Force->y * 0.2;
-		this->Acceleration->x += Force->x * 0.2;
+		this->Acceleration->y += Force->y * 0.05;
+		this->Acceleration->x += Force->x * 0.05;
 	}
 	if (input()->getKey(KeyCode::Right)) {
 		polar.angle += rotspeed * deltaTime; // rotate right

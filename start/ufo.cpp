@@ -49,8 +49,6 @@ Ufo::Ufo() : Entity()
 	tmp->addPoint(-40, 5);
 	tmp->addPoint(-35, 10);
 	
-	//Create a BasicEntity as our spaceship.
-
 	this->addLine(tmp);
 	delete tmp; // delete when you're done with it.
 
@@ -63,9 +61,6 @@ Ufo::~Ufo()
 
 void Ufo::update(float deltaTime)
 {
-	
-	
-
 	this->line()->color = RED;
 
 	if (spacex <= SWIDTH / 4.5 && spacey <= SHEIGHT / 4.5)
@@ -76,6 +71,5 @@ void Ufo::update(float deltaTime)
 	{
 		this->position = Point2(SWIDTH / 8, SHEIGHT / 8);
 	}
-
 
 }

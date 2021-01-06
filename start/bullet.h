@@ -24,11 +24,7 @@ public:
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
-
-	Bullet* spaceship;
-	Vector2* Acceleration;
-	Vector2* Velocity;
-	Vector2* Force;
+	Vector2 Velocity;
 	float heading;
 
 private:

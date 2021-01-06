@@ -37,7 +37,8 @@ private:
 	
 	SpaceShip* spaceship;
 	Ufo* ufo;
-	Bullet* bullet;
+	//Bullet* bullet;
+	std::vector<Bullet*> bullets;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 	void updateSpaceShip(float deltaTime);
