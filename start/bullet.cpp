@@ -10,7 +10,6 @@
 
 Bullet::Bullet() : Entity()
 {
-	Position = new Vector2(SWIDTH / 2, SHEIGHT / 2);
 	Velocity = new Vector2(0.0f, 0.0f);
 	Acceleration = new Vector2(0, -3);
 	heading = 0;
@@ -39,12 +38,11 @@ void Bullet::update(float deltaTime)
 {
 	this->line()->color = GREEN;
 	
-	this->rotation.z = spacer;
+	
 	
 	this->position.y += this->Velocity->y;
 	this->position.x += this->Velocity->x;
 
-	this->line()->color = BLUE;
 
 	float rotspeed = 3.14f;
 
@@ -59,7 +57,7 @@ void Bullet::update(float deltaTime)
 		this->Velocity->y = Force->y * 10;
 		
 		this->Velocity->x = Force->x * 10;
-		
+		this->rotation.z = spacer;
 	}
 	
 

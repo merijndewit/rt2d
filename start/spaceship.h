@@ -17,7 +17,7 @@
 extern float spacex;
 extern float spacey;
 extern float spacer;
-
+extern int spaceshipHealth;
 
 class SpaceShip : public Entity
 {
@@ -37,7 +37,6 @@ public:
 	SpaceShip* spaceship;
 	Vector2* Acceleration;
 	Vector2* Velocity;
-	Vector2* Position;
 	Vector2* Force;
 	float heading;
 

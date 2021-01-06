@@ -160,6 +160,8 @@ IF(MAKE_START)
 		start/myscene.h
 		start/bullet.cpp
 		start/bullet.h
+		start/ufo.cpp
+		start/ufo.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}

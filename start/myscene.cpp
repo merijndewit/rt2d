@@ -20,8 +20,10 @@ MyScene::MyScene() : Scene()
 
 	spaceship = new SpaceShip();
 	bullet = new Bullet();
+	ufo = new Ufo();
 
 	this->addChild(spaceship);
+	this->addChild(ufo);
 	
 	
 	for (size_t i = 0; i < 15; i++)
@@ -38,9 +40,11 @@ MyScene::~MyScene()
 	
 	
 	this->removeChild(spaceship);
+	this->removeChild(ufo);
 
 	
 	delete spaceship;
+	delete ufo;
 }
 
 void MyScene::update(float deltaTime)
