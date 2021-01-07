@@ -163,6 +163,8 @@ IF(MAKE_START)
 		start/ufo.cpp
 		start/ufo.h
 		start/collider.h
+		start/background.cpp
+		start/background.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}

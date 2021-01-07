@@ -55,6 +55,11 @@ Ufo::Ufo() : Entity()
 	this->addLine(tmp);
 	delete tmp; // delete when you're done with it.
 	this->position = Point2(160, 90);
+	/* uncomment for visual collision
+	Line c1;
+	c1.createCircle(45, 18);
+	this->addLine(&c1);
+	*/
 }
 
 Ufo::~Ufo()

@@ -14,6 +14,7 @@
 #include "spaceship.h"
 #include "bullet.h"
 #include "ufo.h"
+#include "background.h"
 
 
 /// @brief The MyScene class is the Scene implementation.
@@ -36,8 +37,10 @@ private:
 	
 	SpaceShip* spaceship;
 	Ufo* ufo;
+	
 	//Bullet* bullet;
 	std::vector<Bullet*> bullets;
+	std::vector<Background*> stars;
 
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;

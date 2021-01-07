@@ -24,8 +24,11 @@ Bullet::Bullet() : Entity()
 
 	this->addLine(tmp);	
 	delete tmp; // delete when you're done with it.	
-
-
+	/*
+	Line c1;
+	c1.createCircle(12, 18);
+	this->addLine(&c1);
+	*/
 
 }
 
