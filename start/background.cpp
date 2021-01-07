@@ -28,7 +28,6 @@ Background::Background() : Entity()
 	
 	this->addLine(tmp);
 	delete tmp; // delete when you're done with it.
-	this->position = Point2(500, 500);
 
 }
 
@@ -39,6 +38,19 @@ Background::~Background()
 
 void Background::update(float deltaTime)
 {
+	this->position.x -= (0.05);
+	this->position.y += (0.075);
+	this->line()->color.a = 100;
+
+	if (this->position.x < 0)
+	{
+		this->position.x = SWIDTH;
+	}
+	if (this->position.y > SHEIGHT)
+	{
+		this->position.y = 0;
+	}
+
 	this->line()->color = WHITE;
 
 }

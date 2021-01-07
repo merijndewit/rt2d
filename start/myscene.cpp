@@ -19,24 +19,17 @@ MyScene::MyScene() : Scene()
 {
 	// start the timer.
 	t.start();
-
 	spaceship = new SpaceShip();
 	ufo = new Ufo();
-
 	this->addChild(spaceship);
 	this->addChild(ufo);
-
-	
 }
 
 
 MyScene::~MyScene()
 {
-	
-	
 	this->removeChild(spaceship);
 	this->removeChild(ufo);
-
 	
 	delete spaceship;
 	delete ufo;
@@ -44,9 +37,6 @@ MyScene::~MyScene()
 
 void MyScene::update(float deltaTime)
 {
-	// ###############################################################
-	// Escape key stops the Scene
-	// ###############################################################
 	if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
 	}
@@ -72,9 +62,7 @@ void MyScene::update(float deltaTime)
 			removeChild(bullets[i]);
 			delete bullets[i]; // delete from the heap first
 			bullets.erase(bullets.begin() + i); // then, remove from the list
-			
 		}
-		
 	}
 	for (int i = stars.size() - 1; i < 100; i++)
 	{
@@ -82,10 +70,14 @@ void MyScene::update(float deltaTime)
 		s->position.x = 1 + (rand() % SWIDTH);
 		s->position.y = 1 + (rand() % SHEIGHT);
 		s->rotation.z = 1 + (rand() % 12);
+		
 		//s->rotation = 1 + (rand() % 3);
 		addChild(s);
 		stars.push_back(s);
 	}
+
+
+
 
 
 }

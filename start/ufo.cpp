@@ -22,7 +22,7 @@ Ufo::Ufo() : Entity()
 {
 	//movement ship
 
-	Position = Vector2(100, 100, 64);
+	Position = Vector2(100, 100, 45);
 	Line* tmp = new Line();
 	tmp->addPoint(-35, 10);
 	tmp->addPoint(-15, 10);
