@@ -51,7 +51,7 @@ void MyScene::update(float deltaTime)
 	}
 
 
-	if (input()->getKeyDown(KeyCode::Space)) {
+	if (input()->getKeyUp(KeyCode::Space)) {
 		Bullet* b = new Bullet();
 		b->position = spaceship->position;
 		b->rotation = spaceship->rotation;
@@ -64,24 +64,19 @@ void MyScene::update(float deltaTime)
 	}
 
 	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
-		if (bullets[i]->position.y > SHEIGHT || bullets[i]->position.y < 0 || bullets[i]->position.x < 0 || bullets[i]->position.x > SWIDTH) {
+		float dx = bullets[i]->position.x - ufo->position.x;
+		float dy = bullets[i]->position.y - ufo->position.y;
+		std::cout << dx;
+		std::cout << "-";
+		float radii = bullets[i]->position.z + UfoR;
+		if (bullets[i]->position.y > SHEIGHT || bullets[i]->position.y < 0 || bullets[i]->position.x < 0 || bullets[i]->position.x > SWIDTH || (dx * dx + dy * dy) <= (radii * radii)) {
 			removeChild(bullets[i]);
 			delete bullets[i]; // delete from the heap first
 			bullets.erase(bullets.begin() + i); // then, remove from the list
 			
 		}
 	}
-	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
-		float dx = bullets[i]->position.x - 100;
-		float dy = bullets[i]->position.y - 100;
-		float radii = bullets[i]->position.z + 200;
-		if ((dx * dx + dy * dy) < (radii * radii))
-		{
-			removeChild(bullets[i]);
-			delete bullets[i]; // delete from the heap first
-			bullets.erase(bullets.begin() + i); // then, remove from the list
-		}
-	}
+
 }
 
 

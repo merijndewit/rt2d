@@ -13,8 +13,9 @@
 
 /// @brief The MyEntity class is the Entity implementation.
 
-
-
+extern float UfoX;
+extern float UfoY;
+extern float UfoR;
 
 class Ufo : public Entity
 {
@@ -30,7 +31,7 @@ public:
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
-	
+	Vector2 Position;
 	Ufo* ufo;
 
 private:

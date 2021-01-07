@@ -12,7 +12,7 @@
 Bullet::Bullet() : Entity()
 {
 	//movement bullet
-	Velocity = Vector2(0.0f, 0.0f, 64);
+	Velocity = Vector2(0.0f, 0.0f, 32);
 	heading = 0;
 	
 	//draw bullet

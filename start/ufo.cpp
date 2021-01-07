@@ -9,8 +9,11 @@
 #include <vector>
 #include "ufo.h"
 #include "myscene.h"
+#include "collider.h"
 
-
+float UfoX;
+float UfoY;
+float UfoR;
 
 
 
@@ -18,8 +21,8 @@
 Ufo::Ufo() : Entity()
 {
 	//movement ship
-	this->position = Point2(SWIDTH / 8, SHEIGHT / 8);
 
+	Position = Vector2(100, 100, 64);
 	Line* tmp = new Line();
 	tmp->addPoint(-35, 10);
 	tmp->addPoint(-15, 10);
@@ -51,7 +54,7 @@ Ufo::Ufo() : Entity()
 	
 	this->addLine(tmp);
 	delete tmp; // delete when you're done with it.
-
+	this->position = Point2(160, 90);
 }
 
 Ufo::~Ufo()
@@ -63,13 +66,19 @@ void Ufo::update(float deltaTime)
 {
 	this->line()->color = RED;
 
-	if (spacex <= SWIDTH / 4.5 && spacey <= SHEIGHT / 4.5)
+	if (spacex <= 280 && spacey <= 160)
 	{
-		this->position = Point2(SWIDTH / 1.1, SHEIGHT / 1.1);
-	}
-	if (spacex >= SWIDTH / 1.2 && spacey >= SHEIGHT / 1.2)
-	{
-		this->position = Point2(SWIDTH / 8, SHEIGHT / 8);
-	}
+		this->position = Point2(1100, 650);
 
+	}
+	if (spacex >= 1100 && spacey >= 650)
+	{
+		this->position = Point2(160, 90);
+
+	}
+	
+	
+
+	UfoR = this->Position.z;
+	Circle circ1 = Circle(this->position.x, this->position.y, 64);
 }
