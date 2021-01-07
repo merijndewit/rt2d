@@ -162,6 +162,7 @@ IF(MAKE_START)
 		start/bullet.h
 		start/ufo.cpp
 		start/ufo.h
+		start/collider.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}

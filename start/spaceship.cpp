@@ -54,7 +54,7 @@ void SpaceShip::update(float deltaTime)
 	this->position.y += Velocity->y;
 	
 
-	this->line()->color = BLUE;
+	this->line()->color = MAGENTA;
 
 	float rotspeed = 3.14f;
 

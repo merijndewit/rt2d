@@ -7,11 +7,12 @@
 #include "bullet.h"
 #include <time.h>
 #include "spaceship.h"
+#include "collider.h"
 
 Bullet::Bullet() : Entity()
 {
 	//movement bullet
-	Velocity = Vector2(0.0f, 0.0f);
+	Velocity = Vector2(0.0f, 0.0f, 64);
 	heading = 0;
 	
 	//draw bullet
@@ -23,6 +24,8 @@ Bullet::Bullet() : Entity()
 
 	this->addLine(tmp);	
 	delete tmp; // delete when you're done with it.	
+
+
 
 }
 
@@ -36,7 +39,7 @@ void Bullet::update(float deltaTime)
 	this->line()->color = GREEN;
 	this->position.y += this->Velocity.y;
 	this->position.x += this->Velocity.x;
-
+	Circle circ1 = Circle(this->position.x, this->position.y, 64);
 	
 	
 }

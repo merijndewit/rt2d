@@ -11,6 +11,7 @@
 #include "myscene.h"
 #include "bullet.h"
 
+
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
 MyScene::MyScene() : Scene()
@@ -23,8 +24,6 @@ MyScene::MyScene() : Scene()
 
 	this->addChild(spaceship);
 	this->addChild(ufo);
-	
-	
 
 
 }
@@ -51,6 +50,7 @@ void MyScene::update(float deltaTime)
 		this->stop();
 	}
 
+
 	if (input()->getKeyDown(KeyCode::Space)) {
 		Bullet* b = new Bullet();
 		b->position = spaceship->position;
@@ -71,11 +71,18 @@ void MyScene::update(float deltaTime)
 			
 		}
 	}
-
-
-
-
-
+	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
+		float dx = bullets[i]->position.x - 100;
+		float dy = bullets[i]->position.y - 100;
+		float radii = bullets[i]->position.z + 200;
+		if ((dx * dx + dy * dy) < (radii * radii))
+		{
+			removeChild(bullets[i]);
+			delete bullets[i]; // delete from the heap first
+			bullets.erase(bullets.begin() + i); // then, remove from the list
+		}
+	}
 }
+
 
 

@@ -16,7 +16,6 @@
 #include "ufo.h"
 
 
-
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
 {
@@ -39,9 +38,9 @@ private:
 	Ufo* ufo;
 	//Bullet* bullet;
 	std::vector<Bullet*> bullets;
+
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
-	void updateSpaceShip(float deltaTime);
 };
 
 #endif /* SCENE00_H */
