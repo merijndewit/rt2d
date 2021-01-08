@@ -26,16 +26,13 @@ MyScene::MyScene() : Scene()
 	ufo = new Ufo();
 	this->addChild(spaceship);
 	this->addChild(ufo);
-
-
 }
-
 
 MyScene::~MyScene()
 {
 	this->removeChild(spaceship);
 	this->removeChild(ufo);
-	
+
 	delete spaceship;
 	delete ufo;
 }
@@ -57,14 +54,14 @@ void MyScene::update(float deltaTime)
 		bullets.push_back(b);
 		// Polar to cartesian for force vector!
 		Vector2 Force = Vector2(cos(spacer), sin(spacer));
-		b->Velocity.y = Force.y * 10;
-		b->Velocity.x = Force.x * 10;
+		b->Velocity.y = Force.y * 6;
+		b->Velocity.x = Force.x * 6;
 	}
 
 	if (timerCurrent >= timerTotal) {
 		enemyBullet* b = new enemyBullet();
 		b->position = ufo->position;
-		
+
 		addChild(b);
 		enemyB.push_back(b);
 		// Polar to cartesian for force vector!
@@ -74,8 +71,8 @@ void MyScene::update(float deltaTime)
 		float rotation = atan2(y1, x1);
 		std::cout << "-";
 		Vector2 Force = Vector2(cos(rotation), sin(rotation));
-		b->Velocity.y = Force.y*15;
-		b->Velocity.x = Force.x*15;
+		b->Velocity.y = Force.y * 5;
+		b->Velocity.x = Force.x * 5;
 		timerCurrent -= timerTotal;
 	}
 
@@ -117,17 +114,33 @@ void MyScene::update(float deltaTime)
 		s->position.x = 1 + (rand() % SWIDTH);
 		s->position.y = 1 + (rand() % SHEIGHT);
 		s->rotation.z = 1 + (rand() % 12);
-		
+
 		//s->rotation = 1 + (rand() % 3);
 		addChild(s);
 		stars.push_back(s);
 	}
 
+	for (int i = astroids.size() - 1; i < 10; i++)
+	{
+		Astroid* a = new Astroid();
+		a->position.x = 1 + (rand() % SWIDTH);
+		a->position.y = 1 + (rand() % SHEIGHT);
+		a->rotation.z = 1 + (rand() % 12);
+		a->position.y -= SHEIGHT;
 
+		//s->rotation = 1 + (rand() % 3);
+		addChild(a);
+		astroids.push_back(a);
+	}
 
-
-
+	for (int i = astroids.size() - 1; i >= 0; i--) { // backwards!!!
+		float dx = astroids[i]->position.x - spaceship->position.x;
+		float dy = astroids[i]->position.y - spaceship->position.y;
+		float radii = astroids[i]->position.z + 62;
+		if ((dx * dx + dy * dy) <= (radii * radii)) {
+			removeChild(astroids[i]);
+			delete astroids[i]; // delete from the heap first
+			astroids.erase(astroids.begin() + i); // then, remove from the list
+		}
+	}
 }
-
-
-

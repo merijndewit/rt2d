@@ -167,6 +167,8 @@ IF(MAKE_START)
 		start/background.h
 		start/enemyBullet.cpp
 		start/enemyBullet.h
+		start/astroid.cpp
+		start/astroid.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}
