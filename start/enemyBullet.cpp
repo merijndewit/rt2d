@@ -4,12 +4,12 @@
  * Copyright 2015 Your Name <you@yourhost.com>
  */
 
-#include "bullet.h"
+#include "enemyBullet.h"
 #include <time.h>
 #include "spaceship.h"
 #include "collider.h"
 
-Bullet::Bullet() : Entity()
+enemyBullet::enemyBullet() : Entity()
 {
 	//movement bullet
 	Velocity = Vector2(0.0f, 0.0f, 32);
@@ -32,14 +32,14 @@ Bullet::Bullet() : Entity()
 
 }
 
-Bullet::~Bullet()
+enemyBullet::~enemyBullet()
 {
 
 }
 
-void Bullet::update(float deltaTime)
+void enemyBullet::update(float deltaTime)
 {
-	this->line()->color = GREEN;
+	this->line()->color = RED;
 	this->position.y += this->Velocity.y;
 	this->position.x += this->Velocity.x;
 

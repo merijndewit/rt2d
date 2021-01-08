@@ -22,7 +22,7 @@ float spaceVy;
 SpaceShip::SpaceShip() : Entity()
 {
 	//movement ship
-	Velocity = new Vector2(0.0f, 0.0f);
+	Velocity = new Vector2(0.0f, 0.0f, 24);
 	Acceleration = new Vector2(0, -3);
 	heading = 0;
 
@@ -38,6 +38,11 @@ SpaceShip::SpaceShip() : Entity()
 	this->position = Point2(SWIDTH / 2, SHEIGHT / 2);
 	delete tmp; // delete when you're done with it.
 	
+	/*
+	Line c1;
+	c1.createCircle(24, 18);
+	this->addLine(&c1);
+	*/
 
 }
 

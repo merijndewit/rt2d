@@ -86,5 +86,4 @@ void Ufo::update(float deltaTime)
 	
 
 	UfoR = this->Position.z;
-	Circle circ1 = Circle(this->position.x, this->position.y, 64);
 }

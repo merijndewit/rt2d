@@ -7,11 +7,14 @@
 #include <fstream>
 #include <sstream>
 #include <time.h>
+#include <ctime>
 
 #include "myscene.h"
 #include "bullet.h"
 #include "background.h"
 
+float timerCurrent = 0.0f;
+float timerTotal = 0.25f;
 
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
@@ -23,6 +26,8 @@ MyScene::MyScene() : Scene()
 	ufo = new Ufo();
 	this->addChild(spaceship);
 	this->addChild(ufo);
+
+
 }
 
 
@@ -37,6 +42,8 @@ MyScene::~MyScene()
 
 void MyScene::update(float deltaTime)
 {
+	timerCurrent += deltaTime;
+
 	if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
 	}
@@ -54,6 +61,24 @@ void MyScene::update(float deltaTime)
 		b->Velocity.x = Force.x * 10;
 	}
 
+	if (timerCurrent >= timerTotal) {
+		enemyBullet* b = new enemyBullet();
+		b->position = ufo->position;
+		
+		addChild(b);
+		enemyB.push_back(b);
+		// Polar to cartesian for force vector!
+
+		float x1 = spaceship->position.x - ufo->position.x;
+		float y1 = spaceship->position.y - ufo->position.y;
+		float rotation = atan2(y1, x1);
+		std::cout << "-";
+		Vector2 Force = Vector2(cos(rotation), sin(rotation));
+		b->Velocity.y = Force.y*15;
+		b->Velocity.x = Force.x*15;
+		timerCurrent -= timerTotal;
+	}
+
 	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
 		float dx = bullets[i]->position.x - ufo->position.x;
 		float dy = bullets[i]->position.y - ufo->position.y;
@@ -69,6 +94,23 @@ void MyScene::update(float deltaTime)
 			std::cout << ufoHealth;
 		}
 	}
+
+	for (int i = enemyB.size() - 1; i >= 0; i--) { // backwards!!!
+		float dx = enemyB[i]->position.x - spaceship->position.x;
+		float dy = enemyB[i]->position.y - spaceship->position.y;
+		float radii = enemyB[i]->position.z + UfoR;
+		if (enemyB[i]->position.y > SHEIGHT || enemyB[i]->position.y < 0 || enemyB[i]->position.x < 0 || enemyB[i]->position.x > SWIDTH || (dx * dx + dy * dy) <= (radii * radii)) {
+			removeChild(enemyB[i]);
+			delete enemyB[i]; // delete from the heap first
+			enemyB.erase(enemyB.begin() + i); // then, remove from the list
+		}
+		if ((dx * dx + dy * dy) <= (radii * radii))
+		{
+			ufoHealth -= 100;
+			std::cout << ufoHealth;
+		}
+	}
+
 	for (int i = stars.size() - 1; i < 100; i++)
 	{
 		Background* s = new Background();

@@ -165,6 +165,8 @@ IF(MAKE_START)
 		start/collider.h
 		start/background.cpp
 		start/background.h
+		start/enemyBullet.cpp
+		start/enemyBullet.h
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}
