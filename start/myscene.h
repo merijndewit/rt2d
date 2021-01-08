@@ -10,6 +10,7 @@
 #define MYSCENE_H
 
 #include <rt2d/scene.h>
+#include <rt2d/text.h>
 
 #include "spaceship.h"
 #include "bullet.h"
@@ -41,7 +42,6 @@ private:
 	//Bullet* bullet;
 	std::vector<Bullet*> bullets;
 	std::vector<Background*> stars;
-
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 };

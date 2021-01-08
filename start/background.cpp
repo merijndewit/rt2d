@@ -25,8 +25,10 @@ Background::Background() : Entity()
 	tmp->addPoint(2.5f, 0.0f);
 	tmp->addPoint(2.5f, 2.5f);
 	tmp->addPoint(2.5f, -2.5f);
-	
+
 	this->addLine(tmp);
+	this->line()->color = WHITE;
+	this->line()->color.a = 100;
 	delete tmp; // delete when you're done with it.
 
 }
@@ -51,6 +53,6 @@ void Background::update(float deltaTime)
 		this->position.y = 0;
 	}
 
-	this->line()->color = WHITE;
 
+	this->line()->color.a = 100;
 }

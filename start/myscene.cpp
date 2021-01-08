@@ -63,6 +63,11 @@ void MyScene::update(float deltaTime)
 			delete bullets[i]; // delete from the heap first
 			bullets.erase(bullets.begin() + i); // then, remove from the list
 		}
+		if ((dx * dx + dy * dy) <= (radii * radii))
+		{
+			ufoHealth -= 100;
+			std::cout << ufoHealth;
+		}
 	}
 	for (int i = stars.size() - 1; i < 100; i++)
 	{

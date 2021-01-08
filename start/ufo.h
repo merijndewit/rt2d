@@ -16,6 +16,7 @@
 extern float UfoX;
 extern float UfoY;
 extern float UfoR;
+extern int ufoHealth;
 
 class Ufo : public Entity
 {

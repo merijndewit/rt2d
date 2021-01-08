@@ -15,12 +15,13 @@ float UfoX;
 float UfoY;
 float UfoR;
 
+int ufoHealth;
 
 
 
 Ufo::Ufo() : Entity()
 {
-	//movement ship
+	ufoHealth = 10000;
 
 	Position = Vector2(100, 100, 45);
 	Line* tmp = new Line();
