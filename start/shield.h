@@ -11,7 +11,7 @@
 
 #include <rt2d/entity.h>
 
-/// @brief The MyEntity class is the Entity implementation.
+ /// @brief The MyEntity class is the Entity implementation.
 class Shield : public Entity
 {
 public:
@@ -27,7 +27,6 @@ public:
 	Vector2 Velocity;
 
 private:
-
 };
 
 #endif /* SHIELD_H */

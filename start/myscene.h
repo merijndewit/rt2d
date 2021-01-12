@@ -20,8 +20,7 @@
 #include "astroid.h"
 #include "shield.h"
 
-
-/// @brief The MyScene class is the Scene implementation.
+ /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
 {
 public:
@@ -34,11 +33,10 @@ public:
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
-	
-	
+
 private:
 	/// @brief the rotating square in the middle of the screen
-	
+
 	SpaceShip* spaceship;
 	Ufo* ufo;
 	Shield* shield;

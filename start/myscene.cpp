@@ -17,7 +17,7 @@ float timerCurrent = 0.0f;
 float timerTotal = 0.25f;
 int spaceshipHealth = 10000;
 int shieldTimer = 0;
-
+bool actShield;
 
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
@@ -33,15 +33,13 @@ MyScene::MyScene() : Scene()
 	text1.push_back(line1);
 	text2.push_back(line2);
 
-	
-	
 	spaceship = new SpaceShip();
 	ufo = new Ufo();
 	shield = new Shield();
 
 	this->addChild(spaceship);
 	this->addChild(ufo);
-	
+
 	this->addChild(line);
 	this->addChild(line1);
 	this->addChild(line2);
@@ -55,8 +53,6 @@ MyScene::MyScene() : Scene()
 	line2->scale = Point2(0.5f, 0.5f);
 	line2->position.x = 30;
 	line2->position.y = SHEIGHT - 30;
-	
-	
 }
 
 MyScene::~MyScene()
@@ -134,9 +130,8 @@ void MyScene::update(float deltaTime)
 			removeChild(enemyB[i]);
 			delete enemyB[i]; // delete from the heap first
 			enemyB.erase(enemyB.begin() + i); // then, remove from the list
-			
 		}
-		if ((dx * dx + dy * dy) <= (radii * radii))
+		if ((dx * dx + dy * dy) <= (radii * radii) && actShield == false)
 		{
 			spaceshipHealth -= 100;
 		}
@@ -178,14 +173,16 @@ void MyScene::update(float deltaTime)
 		}
 	}
 
-	if (input()->getKeyDown(KeyCode::O) && shieldTimer <= -60)
+	if (input()->getKeyDown(KeyCode::Q) && shieldTimer <= -60)
 	{
 		this->addChild(shield);
 		shieldTimer = 18;
+		actShield = true;
 	}
 	else if (shield && shieldTimer == 0)
 	{
 		this->removeChild(shield);
+		actShield = false;
 	}
 
 	std::cout << shieldTimer;
@@ -201,7 +198,7 @@ void MyScene::update(float deltaTime)
 	std::stringstream shieldtxt;
 	if (shieldTimer <= -60)
 	{
-		shieldtxt << "Shield: Ready";
+		shieldtxt << "Shield: Ready, Press: Q";
 	}
 	else if (shieldTimer <= 0)
 	{
@@ -212,5 +209,5 @@ void MyScene::update(float deltaTime)
 		shieldtxt << "Shield: Active";
 	}
 
-	text2[0]->message(shieldtxt.str(), BLUE);
+	text2[0]->message(shieldtxt.str(), MAGENTA);
 }
