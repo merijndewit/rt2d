@@ -20,6 +20,7 @@
 #include "astroid.h"
 
 
+
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public Scene
 {
@@ -40,12 +41,15 @@ private:
 	
 	SpaceShip* spaceship;
 	Ufo* ufo;
-	
+
+	unsigned int top_layer;
+	std::vector<Entity*> layers;
 	//Bullet* bullet;
 	std::vector<Bullet*> bullets;
 	std::vector<enemyBullet*> enemyB;
 	std::vector<Background*> stars;
 	std::vector<Astroid*> astroids;
+	std::vector<Text*> text;
 
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;

@@ -22,10 +22,22 @@ MyScene::MyScene() : Scene()
 {
 	// start the timer.
 	t.start();
+
+	Text* line = new Text();
+	text.push_back(line);
+
+	
 	spaceship = new SpaceShip();
 	ufo = new Ufo();
+
 	this->addChild(spaceship);
 	this->addChild(ufo);
+	this->addChild(line);
+
+	line->scale = Point2(0.5f, 0.5f);
+	line->position.x = 30;
+	line->position.y = 30;
+	
 }
 
 MyScene::~MyScene()
@@ -145,4 +157,8 @@ void MyScene::update(float deltaTime)
 			astroids.erase(astroids.begin() + i); // then, remove from the list
 		}
 	}
+
+	std::stringstream ufotxt;
+	ufotxt << "Health: " << ufoHealth;
+	text[0]->message(ufotxt.str());
 }
