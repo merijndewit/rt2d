@@ -69,10 +69,12 @@ void MyScene::update(float deltaTime)
 		float x1 = spaceship->position.x - ufo->position.x;
 		float y1 = spaceship->position.y - ufo->position.y;
 		float rotation = atan2(y1, x1);
+		b->rotation.z = rotation;
 		std::cout << "-";
 		Vector2 Force = Vector2(cos(rotation), sin(rotation));
 		b->Velocity.y = Force.y * 5;
 		b->Velocity.x = Force.x * 5;
+		b->rotation.z = rotation;
 		timerCurrent -= timerTotal;
 	}
 
@@ -96,6 +98,7 @@ void MyScene::update(float deltaTime)
 		float dx = enemyB[i]->position.x - spaceship->position.x;
 		float dy = enemyB[i]->position.y - spaceship->position.y;
 		float radii = enemyB[i]->position.z + UfoR;
+
 		if (enemyB[i]->position.y > SHEIGHT || enemyB[i]->position.y < 0 || enemyB[i]->position.x < 0 || enemyB[i]->position.x > SWIDTH || (dx * dx + dy * dy) <= (radii * radii)) {
 			removeChild(enemyB[i]);
 			delete enemyB[i]; // delete from the heap first
@@ -103,8 +106,7 @@ void MyScene::update(float deltaTime)
 		}
 		if ((dx * dx + dy * dy) <= (radii * radii))
 		{
-			ufoHealth -= 100;
-			std::cout << ufoHealth;
+
 		}
 	}
 
