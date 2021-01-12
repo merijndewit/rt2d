@@ -18,7 +18,7 @@
 #include "background.h"
 #include "enemyBullet.h"
 #include "astroid.h"
-
+#include "shield.h"
 
 
 /// @brief The MyScene class is the Scene implementation.
@@ -41,6 +41,7 @@ private:
 	
 	SpaceShip* spaceship;
 	Ufo* ufo;
+	Shield* shield;
 
 	unsigned int top_layer;
 	std::vector<Entity*> layers;

@@ -169,6 +169,9 @@ IF(MAKE_START)
 		start/enemyBullet.h
 		start/astroid.cpp
 		start/astroid.h
+		start/shield.cpp
+		start/shield.h
+		
 	)
 	target_link_libraries(start
 		${ALL_GRAPHICS_LIBS}

@@ -16,6 +16,8 @@
 float timerCurrent = 0.0f;
 float timerTotal = 0.25f;
 int spaceshipHealth = 10000;
+int shieldTimer = 0;
+
 
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
@@ -35,9 +37,11 @@ MyScene::MyScene() : Scene()
 	
 	spaceship = new SpaceShip();
 	ufo = new Ufo();
+	shield = new Shield();
 
 	this->addChild(spaceship);
 	this->addChild(ufo);
+	
 	this->addChild(line);
 	this->addChild(line1);
 	this->addChild(line2);
@@ -73,7 +77,7 @@ void MyScene::update(float deltaTime)
 	}
 	srand((unsigned)time(0));
 
-	if (input()->getKey(KeyCode::Space)) {
+	if (input()->getKeyUp(KeyCode::Space)) {
 		Bullet* b = new Bullet();
 		b->position = spaceship->position;
 		b->rotation = spaceship->rotation;
@@ -103,6 +107,7 @@ void MyScene::update(float deltaTime)
 		b->Velocity.x = Force.x * 5;
 		b->rotation.z = rotation;
 		timerCurrent -= timerTotal;
+		shieldTimer -= 1;
 	}
 
 	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
@@ -173,6 +178,18 @@ void MyScene::update(float deltaTime)
 		}
 	}
 
+	if (input()->getKeyDown(KeyCode::O) && shieldTimer <= -60)
+	{
+		this->addChild(shield);
+		shieldTimer = 18;
+	}
+	else if (shield && shieldTimer == 0)
+	{
+		this->removeChild(shield);
+	}
+
+	std::cout << shieldTimer;
+
 	std::stringstream ufotxt;
 	ufotxt << "Health: " << ufoHealth;
 	text[0]->message(ufotxt.str(), RED);
@@ -181,5 +198,19 @@ void MyScene::update(float deltaTime)
 	spaceshiptxt << "Health: " << spaceshipHealth;
 	text1[0]->message(spaceshiptxt.str(), GREEN);
 
-	text2[0]->message("TEST2");
+	std::stringstream shieldtxt;
+	if (shieldTimer <= -60)
+	{
+		shieldtxt << "Shield: Ready";
+	}
+	else if (shieldTimer <= 0)
+	{
+		shieldtxt << "Shield: Recharging";
+	}
+	else if (shieldTimer >= 0)
+	{
+		shieldtxt << "Shield: Active";
+	}
+
+	text2[0]->message(shieldtxt.str(), BLUE);
 }
