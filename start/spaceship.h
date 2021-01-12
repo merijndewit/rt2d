@@ -17,7 +17,6 @@
 extern float spacex;
 extern float spacey;
 extern float spacer;
-extern int spaceshipHealth;
 
 class SpaceShip : public Entity
 {

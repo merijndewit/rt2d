@@ -15,6 +15,7 @@
 
 float timerCurrent = 0.0f;
 float timerTotal = 0.25f;
+int spaceshipHealth = 10000;
 
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
@@ -24,8 +25,13 @@ MyScene::MyScene() : Scene()
 	t.start();
 
 	Text* line = new Text();
+	Text* line1 = new Text();
+	Text* line2 = new Text();
 	text.push_back(line);
+	text1.push_back(line1);
+	text2.push_back(line2);
 
+	
 	
 	spaceship = new SpaceShip();
 	ufo = new Ufo();
@@ -33,10 +39,19 @@ MyScene::MyScene() : Scene()
 	this->addChild(spaceship);
 	this->addChild(ufo);
 	this->addChild(line);
+	this->addChild(line1);
+	this->addChild(line2);
 
 	line->scale = Point2(0.5f, 0.5f);
 	line->position.x = 30;
 	line->position.y = 30;
+	line1->scale = Point2(0.5f, 0.5f);
+	line1->position.x = SWIDTH - 200;
+	line1->position.y = 30;
+	line2->scale = Point2(0.5f, 0.5f);
+	line2->position.x = 30;
+	line2->position.y = SHEIGHT - 30;
+	
 	
 }
 
@@ -58,7 +73,7 @@ void MyScene::update(float deltaTime)
 	}
 	srand((unsigned)time(0));
 
-	if (input()->getKeyUp(KeyCode::Space)) {
+	if (input()->getKey(KeyCode::Space)) {
 		Bullet* b = new Bullet();
 		b->position = spaceship->position;
 		b->rotation = spaceship->rotation;
@@ -102,7 +117,6 @@ void MyScene::update(float deltaTime)
 		if ((dx * dx + dy * dy) <= (radii * radii))
 		{
 			ufoHealth -= 100;
-			std::cout << ufoHealth;
 		}
 	}
 
@@ -115,10 +129,11 @@ void MyScene::update(float deltaTime)
 			removeChild(enemyB[i]);
 			delete enemyB[i]; // delete from the heap first
 			enemyB.erase(enemyB.begin() + i); // then, remove from the list
+			
 		}
 		if ((dx * dx + dy * dy) <= (radii * radii))
 		{
-
+			spaceshipHealth -= 100;
 		}
 	}
 
@@ -160,5 +175,11 @@ void MyScene::update(float deltaTime)
 
 	std::stringstream ufotxt;
 	ufotxt << "Health: " << ufoHealth;
-	text[0]->message(ufotxt.str());
+	text[0]->message(ufotxt.str(), RED);
+
+	std::stringstream spaceshiptxt;
+	spaceshiptxt << "Health: " << spaceshipHealth;
+	text1[0]->message(spaceshiptxt.str(), GREEN);
+
+	text2[0]->message("TEST2");
 }

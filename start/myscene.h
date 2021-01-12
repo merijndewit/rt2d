@@ -50,6 +50,8 @@ private:
 	std::vector<Background*> stars;
 	std::vector<Astroid*> astroids;
 	std::vector<Text*> text;
+	std::vector<Text*> text1;
+	std::vector<Text*> text2;
 
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
