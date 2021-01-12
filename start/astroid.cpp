@@ -15,7 +15,7 @@ Astroid::Astroid() : Entity()
 {
 	//movement ship
 
-	Position = Vector2(100, 100, 33);
+
 	Line* tmp = new Line();
 
 	tmp->addPoint(0, -20);
@@ -51,6 +51,6 @@ Astroid::~Astroid()
 
 void Astroid::update(float deltaTime)
 {
-	this->position.y += (0.75);
+	this->position.y += (1);
 	this->line()->color.a = 100;
 }

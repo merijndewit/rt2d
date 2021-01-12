@@ -74,11 +74,12 @@ MyScene::~MyScene()
 void MyScene::update(float deltaTime)
 {
 	timerCurrent += deltaTime;
+	
 
 	if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
 	}
-	srand((unsigned)time(0));
+	
 
 	if (input()->getKeyUp(KeyCode::Space)) {
 		Bullet* b = new Bullet();
@@ -159,10 +160,12 @@ void MyScene::update(float deltaTime)
 
 	for (int i = astroids.size() - 1; i < 10; i++)
 	{
+		
 		Astroid* a = new Astroid();
-		a->position.x = 1 + (rand() % SWIDTH);
-		a->position.y = 1 + (rand() % SHEIGHT);
-		a->rotation.z = 1 + (rand() % 12);
+
+		a->position.x = (rand() % SWIDTH);
+		a->position.y = (rand() % SHEIGHT);
+		a->rotation.z = (rand() % 12);
 		a->position.y -= SHEIGHT;
 
 		//s->rotation = 1 + (rand() % 3);
@@ -174,7 +177,7 @@ void MyScene::update(float deltaTime)
 		float dx = astroids[i]->position.x - spaceship->position.x;
 		float dy = astroids[i]->position.y - spaceship->position.y;
 		float radii = astroids[i]->position.z + 62;
-		if ((dx * dx + dy * dy) <= (radii * radii)) {
+		if ((dx * dx + dy * dy) <= (radii * radii) || astroids[i]->position.y > SHEIGHT) {
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
@@ -223,5 +226,4 @@ void MyScene::update(float deltaTime)
 	std::stringstream pointstxt;
 	pointstxt << "Points: " << Points;
 	text3[0]->message(pointstxt.str(), PINK);
-	
 }
