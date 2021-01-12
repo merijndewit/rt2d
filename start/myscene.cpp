@@ -16,6 +16,7 @@
 float timerCurrent = 0.0f;
 float timerTotal = 0.25f;
 int spaceshipHealth = 10000;
+int Points = 0;
 int shieldTimer = 0;
 bool actShield;
 
@@ -29,9 +30,11 @@ MyScene::MyScene() : Scene()
 	Text* line = new Text();
 	Text* line1 = new Text();
 	Text* line2 = new Text();
+	Text* line3 = new Text();
 	text.push_back(line);
 	text1.push_back(line1);
 	text2.push_back(line2);
+	text3.push_back(line3);
 
 	spaceship = new SpaceShip();
 	ufo = new Ufo();
@@ -43,6 +46,7 @@ MyScene::MyScene() : Scene()
 	this->addChild(line);
 	this->addChild(line1);
 	this->addChild(line2);
+	this->addChild(line3);
 
 	line->scale = Point2(0.5f, 0.5f);
 	line->position.x = 30;
@@ -53,6 +57,9 @@ MyScene::MyScene() : Scene()
 	line2->scale = Point2(0.5f, 0.5f);
 	line2->position.x = 30;
 	line2->position.y = SHEIGHT - 30;
+	line3->scale = Point2(0.5f, 0.5f);
+	line3->position.x = SWIDTH / 2;
+	line3->position.y = 30;
 }
 
 MyScene::~MyScene()
@@ -118,6 +125,7 @@ void MyScene::update(float deltaTime)
 		if ((dx * dx + dy * dy) <= (radii * radii))
 		{
 			ufoHealth -= 100;
+			Points += 25;
 		}
 	}
 
@@ -196,6 +204,7 @@ void MyScene::update(float deltaTime)
 	text1[0]->message(spaceshiptxt.str(), GREEN);
 
 	std::stringstream shieldtxt;
+
 	if (shieldTimer <= -60)
 	{
 		shieldtxt << "Shield: Ready, Press: Q";
@@ -210,4 +219,9 @@ void MyScene::update(float deltaTime)
 	}
 
 	text2[0]->message(shieldtxt.str(), MAGENTA);
+
+	std::stringstream pointstxt;
+	pointstxt << "Points: " << Points;
+	text3[0]->message(pointstxt.str(), PINK);
+	
 }

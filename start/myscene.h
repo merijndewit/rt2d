@@ -51,7 +51,7 @@ private:
 	std::vector<Text*> text;
 	std::vector<Text*> text1;
 	std::vector<Text*> text2;
-
+	std::vector<Text*> text3;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 };
