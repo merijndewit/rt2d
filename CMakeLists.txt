@@ -171,6 +171,10 @@ IF(MAKE_START)
 		start/astroid.h
 		start/shield.cpp
 		start/shield.h
+		start/mainmenu.cpp
+		start/mainmenu.h
+		start/startmenu.cpp
+		start/startmenu.h
 		
 	)
 	target_link_libraries(start

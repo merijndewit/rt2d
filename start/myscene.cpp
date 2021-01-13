@@ -22,7 +22,7 @@ bool actShield;
 
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
-MyScene::MyScene() : Scene()
+MyScene::MyScene() : MainMenu()
 {
 	// start the timer.
 	t.start();
@@ -74,12 +74,11 @@ MyScene::~MyScene()
 void MyScene::update(float deltaTime)
 {
 	timerCurrent += deltaTime;
-	
+	MainMenu::update(deltaTime);
 
 	if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
 	}
-	
 
 	if (input()->getKeyUp(KeyCode::Space)) {
 		Bullet* b = new Bullet();
@@ -160,7 +159,6 @@ void MyScene::update(float deltaTime)
 
 	for (int i = astroids.size() - 1; i < 10; i++)
 	{
-		
 		Astroid* a = new Astroid();
 
 		a->position.x = (rand() % SWIDTH);

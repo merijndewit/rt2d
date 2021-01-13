@@ -1,11 +1,3 @@
-/**
- * Copyright 2015 Your Name <you@yourhost.com>
- *
- * @file myscene.h
- *
- * @brief description of MyScene behavior.
- */
-
 #ifndef MYSCENE_H
 #define MYSCENE_H
 
@@ -19,9 +11,10 @@
 #include "enemyBullet.h"
 #include "astroid.h"
 #include "shield.h"
+#include "mainmenu.h"
 
- /// @brief The MyScene class is the Scene implementation.
-class MyScene : public Scene
+/// @brief The MyScene class is the Scene implementation.
+class MyScene : public MainMenu
 {
 public:
 	/// @brief Constructor
@@ -43,7 +36,6 @@ private:
 
 	unsigned int top_layer;
 	std::vector<Entity*> layers;
-	//Bullet* bullet;
 	std::vector<Bullet*> bullets;
 	std::vector<enemyBullet*> enemyB;
 	std::vector<Background*> stars;
@@ -56,4 +48,4 @@ private:
 	Timer t;
 };
 
-#endif /* SCENE00_H */
+#endif /* MYSCENE_H */
