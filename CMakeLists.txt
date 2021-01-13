@@ -175,6 +175,8 @@ IF(MAKE_START)
 		start/mainmenu.h
 		start/startmenu.cpp
 		start/startmenu.h
+		start/box.cpp
+		start/box.h
 		
 	)
 	target_link_libraries(start

@@ -5,12 +5,14 @@
 #include <rt2d/scene.h>
 #include <rt2d/text.h>
 
+#include "box.h"
+
 class MainMenu : public Scene
 {
 public:
 	MainMenu();
 	virtual ~MainMenu();
-
+	Box* square1;
 	// must be explicitly called from subclass
 	virtual void update(float deltaTime);
 
