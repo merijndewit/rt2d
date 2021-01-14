@@ -9,6 +9,9 @@
 #include "spaceship.h"
 #include "collider.h"
 
+float bulletx;
+float bullety;
+
 Bullet::Bullet() : Entity()
 {
 	//movement bullet
@@ -43,6 +46,7 @@ void Bullet::update(float deltaTime)
 	this->position.y += this->Velocity.y;
 	this->position.x += this->Velocity.x;
 
-	
+	bulletx = this->position.x;
+	bullety = this->position.y;
 	
 }

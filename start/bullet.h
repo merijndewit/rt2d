@@ -10,7 +10,8 @@
 #define BULLET_H
 
 #include <rt2d/entity.h>
-
+extern float bulletx;
+extern float bullety;
 /// @brief The MyEntity class is the Entity implementation.
 class Bullet : public Entity
 {

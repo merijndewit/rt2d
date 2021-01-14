@@ -184,13 +184,22 @@ void MyScene::update(float deltaTime)
 	}
 
 	for (int i = astroids.size() - 1; i >= 0; i--) { // backwards!!!
-		float dx = astroids[i]->position.x - spaceship->position.x;
-		float dy = astroids[i]->position.y - spaceship->position.y;
+		float dx = astroids[i]->position.x - bulletx;
+		float dy = astroids[i]->position.y - bullety;
 		float radii = astroids[i]->position.z + 62;
+		float sx = astroids[i]->position.x - spaceship->position.x;
+		float sy = astroids[i]->position.y - spaceship->position.y;
+		float sradii = astroids[i]->position.z + 62;
+		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroids[i]->position.y > SHEIGHT) {
+			removeChild(astroids[i]);
+			delete astroids[i]; // delete from the heap first
+			astroids.erase(astroids.begin() + i); // then, remove from the list
+		}
 		if ((dx * dx + dy * dy) <= (radii * radii) || astroids[i]->position.y > SHEIGHT) {
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
+			spaceshipHealth -= 125;
 		}
 	}
 
