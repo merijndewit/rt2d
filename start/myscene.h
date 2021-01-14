@@ -12,7 +12,10 @@
 #include "astroid.h"
 #include "shield.h"
 #include "mainmenu.h"
+#include "astroidparts.h"
 
+extern float astrPosx;
+extern float astrPosy;
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public MainMenu
 {
@@ -44,6 +47,7 @@ private:
 	std::vector<Text*> text1;
 	std::vector<Text*> text2;
 	std::vector<Text*> text3;
+	std::vector<astroidParts*> astroidp;
 	/// @brief a Timer to rotate the color every n seconds
 	Timer t;
 };

@@ -177,6 +177,8 @@ IF(MAKE_START)
 		start/startmenu.h
 		start/box.cpp
 		start/box.h
+		start/astroidparts.cpp
+		start/astroidparts.h
 		
 	)
 	target_link_libraries(start
