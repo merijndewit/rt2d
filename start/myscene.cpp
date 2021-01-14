@@ -15,9 +15,12 @@
 
 float timerCurrent = 0.0f;
 float timerTotal = 0.25f;
+float astroidTimer = 0.0f;
+float astroidTotal = 12;
 int spaceshipHealth = 10000;
 int Points = 0;
 int shieldTimer = 0;
+int astroidCount = 5;
 bool actShield;
 
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
@@ -74,6 +77,7 @@ MyScene::~MyScene()
 void MyScene::update(float deltaTime)
 {
 	timerCurrent += deltaTime;
+	astroidTimer += deltaTime;
 	MainMenu::update(deltaTime);
 
 	if (input()->getKeyUp(KeyCode::Escape)) {
@@ -111,6 +115,14 @@ void MyScene::update(float deltaTime)
 		b->rotation.z = rotation;
 		timerCurrent -= timerTotal;
 		shieldTimer -= 1;
+	}
+
+
+	if (astroidTimer >= astroidTotal) {
+		
+		astroidTimer -= astroidTotal;
+		astroidCount++;
+		std::cout << astroidCount;
 	}
 
 	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
@@ -157,7 +169,7 @@ void MyScene::update(float deltaTime)
 		stars.push_back(s);
 	}
 
-	for (int i = astroids.size() - 1; i < 10; i++)
+	for (int i = astroids.size() - 1; i < astroidCount; i++)
 	{
 		Astroid* a = new Astroid();
 
@@ -194,7 +206,7 @@ void MyScene::update(float deltaTime)
 		actShield = false;
 	}
 
-	std::cout << shieldTimer;
+	
 
 	std::stringstream ufotxt;
 	ufotxt << "Health: " << ufoHealth;
