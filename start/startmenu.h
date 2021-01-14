@@ -13,6 +13,7 @@ public:
 	virtual void update(float deltaTime);
 
 	std::vector<Text*> text;
+	std::vector<Text*> text2;
 
 private:
 	Timer t;

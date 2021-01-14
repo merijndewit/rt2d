@@ -2,6 +2,7 @@
 #include <sstream>
 #include "startmenu.h"
 #include "collider.h"
+int clickCounter;
 
 startMenu::startMenu() : MainMenu()
 {
@@ -13,6 +14,13 @@ startMenu::startMenu() : MainMenu()
 	line1->scale = Point2(0.5f, 0.5f);
 	line1->position = Point2(SWIDTH / 2 - 30, 260);
 
+	Text* line2 = new Text();
+	text2.push_back(line2);
+	this->addChild(line2);
+
+	line2->scale = Point2(0.5f, 0.5f);
+	line2->position = Point2(SWIDTH / 2 - 30, 382);
+
 	square1 = new Box();
 	square1->position = Point2(SWIDTH/2 - (256/2), 200);
 	Line s1;
@@ -23,6 +31,18 @@ startMenu::startMenu() : MainMenu()
 	s1.addPoint(0, 0);
 	square1->addLine(&s1);
 	this->addChild(square1);
+
+	square2 = new Box();
+	square2->position = Point2(SWIDTH / 2 - (256 / 2), 350);
+	Line s2;
+	s2.addPoint(0, 0);
+	s2.addPoint(256, 0);
+	s2.addPoint(256, 64);
+	s2.addPoint(0, 64);
+	s2.addPoint(0, 0);
+	square2->addLine(&s2);
+	this->addChild(square2);
+	clickCounter = 0;
 	
 }
 
@@ -36,6 +56,7 @@ void startMenu::update(float deltaTime)
 	text[0]->message("Play", WHITE);
 
 	Rectangle rect1 = Rectangle(square1->position.x, square1->position.y, 256, 128);
+	Rectangle rect2 = Rectangle(square2->position.x, square2->position.y, 256, 64);
 
 	//get mouse position
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
@@ -44,7 +65,7 @@ void startMenu::update(float deltaTime)
 
 	// reset colors
 	square1->line()->color = GREEN;
-
+	square2->line()->color = RED;
 	
 	if (Collider::point2rectangle(mouse, rect1)) {
 		square1->line()->color = YELLOW;
@@ -53,5 +74,28 @@ void startMenu::update(float deltaTime)
 		}
 	}
 
+	std::stringstream ditxt;
+
+	if (Collider::point2rectangle(mouse, rect2)) {
+		square2->line()->color = MAGENTA;
+		if (input()->getMouseDown(0) && clickCounter == 0) {
+			clickCounter++;
+		}else if (input()->getMouseDown(0) && clickCounter == 1) {
+			clickCounter--;
+		}
+	}
+	if (clickCounter == 0)
+	{
+		ditxt << "Easy", GREEN;
+	}
+	else if (clickCounter == 1)
+	{
+		ditxt << "Hard", RED;
+	}
+
+	text2[0]->message(ditxt.str());
+
+
+	
 	
 }

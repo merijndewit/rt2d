@@ -13,6 +13,7 @@ public:
 	MainMenu();
 	virtual ~MainMenu();
 	Box* square1;
+	Box* square2;
 	// must be explicitly called from subclass
 	virtual void update(float deltaTime);
 
