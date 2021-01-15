@@ -27,6 +27,8 @@ float astrPosx;
 float astrPosy;
 
 bool removeAstroid;
+bool removeAstroidp;
+
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
 MyScene::MyScene() : MainMenu()
@@ -121,9 +123,7 @@ void MyScene::update(float deltaTime)
 		shieldTimer -= 1;
 	}
 
-
 	if (astroidTimer >= astroidTotal) {
-		
 		astroidTimer -= astroidTotal;
 		astroidCount++;
 		std::cout << astroidCount;
@@ -173,8 +173,6 @@ void MyScene::update(float deltaTime)
 		stars.push_back(s);
 	}
 
-
-
 	for (int i = astroids.size() - 1; i < astroidCount; i++)
 	{
 		Astroid* a = new Astroid();
@@ -188,7 +186,6 @@ void MyScene::update(float deltaTime)
 		addChild(a);
 		astroids.push_back(a);
 	}
-
 
 	for (int i = astroids.size() - 1; i >= 0; i--) { // backwards!!!
 		float am = astroids[i]->position.x;
@@ -210,21 +207,27 @@ void MyScene::update(float deltaTime)
 				delete bullets[i]; // delete from the heap first
 				bullets.erase(bullets.begin() + i); // then, remove from the list
 			}
-			
-
 		}
-	
-		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroids[i]->position.y > SHEIGHT || removeAstroid == true) {
 
+		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroids[i]->position.y > SHEIGHT || removeAstroid == true) {
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
 			removeAstroid = false;
+			for (int i = 0; i < 4; i++)
+			{
+				astroidParts* ap = new astroidParts();
+
+				ap->position.x = (am + (rand() % 100));
+				ap->position.y = (bm + (rand() % 100));
+				ap->rotation.z = (rand() % 12);
+
+				//s->rotation = 1 + (rand() % 3);
+				addChild(ap);
+				astroidp.push_back(ap);
+			}
 		}
-		
 	}
-
-
 
 	if (input()->getKeyDown(KeyCode::Q) && shieldTimer <= -60)
 	{
@@ -237,8 +240,6 @@ void MyScene::update(float deltaTime)
 		this->removeChild(shield);
 		actShield = false;
 	}
-
-	
 
 	std::stringstream ufotxt;
 	ufotxt << "Health: " << ufoHealth;
@@ -268,27 +269,34 @@ void MyScene::update(float deltaTime)
 	std::stringstream pointstxt;
 	pointstxt << "Points: " << Points;
 	text3[0]->message(pointstxt.str(), PINK);
-	
 
 	for (int i = astroidp.size() - 1; i >= 0; i--) { // backwards!!!
+		float am = astroidp[i]->position.x;
+		float bm = astroidp[i]->position.y;
 		float dx = astroidp[i]->position.x - bulletx;
 		float dy = astroidp[i]->position.y - bullety;
 		float radii = astroidp[i]->position.z + 62;
 		float sx = astroidp[i]->position.x - spaceship->position.x;
 		float sy = astroidp[i]->position.y - spaceship->position.y;
-		float sradii = astroidp[i]->position.z + 40;
-		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroidp[i]->position.y > SHEIGHT) {
-			removeChild(astroidp[i]);
-			delete astroidp[i]; // delete from the heap first
-			astroidp.erase(astroidp.begin() + i); // then, remove from the list
-			astroidpCount = 0;
+		float sradii = astroidp[i]->position.z + 62;
+		for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
+			float aa = am - bullets[i]->position.x;
+			float bb = bm - bullets[i]->position.y;
+			float radii = bullets[i]->position.z + 15;
+			if ((aa * aa + bb * bb) <= (radii * radii))
+			{
+				removeAstroidp = true;
+				removeChild(bullets[i]);
+				delete bullets[i]; // delete from the heap first
+				bullets.erase(bullets.begin() + i); // then, remove from the list
+			}
 		}
-		/*if ((dx * dx + dy * dy) <= (radii * radii) && (astroidp[i]->scale.x = 1)) {
+
+		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroidp[i]->position.y > SHEIGHT || removeAstroidp == true) {
 			removeChild(astroidp[i]);
 			delete astroidp[i]; // delete from the heap first
 			astroidp.erase(astroidp.begin() + i); // then, remove from the list
-			spaceshipHealth -= 40;
-			astroidpCount = 0;
-		}*/
+			removeAstroidp = false;
+		}
 	}
 }
