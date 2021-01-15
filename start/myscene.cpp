@@ -13,8 +13,8 @@
 #include "bullet.h"
 #include "background.h"
 
-float timerCurrent = 0.0f;
-float timerTotal = 0.25f;
+float timerCurrent = 0;
+float timerTotal;
 float astroidTimer = 0.0f;
 float astroidTotal = 12;
 float ufotimer = 0.0f;
@@ -73,6 +73,7 @@ MyScene::MyScene() : MainMenu()
 	line3->scale = Point2(0.5f, 0.5f);
 	line3->position.x = SWIDTH / 2;
 	line3->position.y = 30;
+	timerTotal = 2;
 }
 
 MyScene::~MyScene()
@@ -95,7 +96,7 @@ void MyScene::update(float deltaTime)
 		this->stop();
 	}
 
-	if (input()->getKey(KeyCode::Space)) {
+	if (input()->getKeyUp(KeyCode::Space)) {
 		Bullet* b = new Bullet();
 		b->position = spaceship->position;
 		b->rotation = spaceship->rotation;
@@ -129,6 +130,11 @@ void MyScene::update(float deltaTime)
 	if (astroidTimer >= astroidTotal) {
 		astroidTimer -= astroidTotal;
 		astroidCount++;
+		if (timerTotal >= 0.2)
+		{
+			timerTotal = timerTotal * 0.95;
+		}
+
 	}
 	if (ufotimer >= ufoTotal) {
 		ufotimer -= ufoTotal;
@@ -213,6 +219,7 @@ void MyScene::update(float deltaTime)
 				removeChild(bullets[i]);
 				delete bullets[i]; // delete from the heap first
 				bullets.erase(bullets.begin() + i); // then, remove from the list
+				Points += 90;
 			}
 		}
 
@@ -233,8 +240,10 @@ void MyScene::update(float deltaTime)
 				addChild(ap);
 				astroidp.push_back(ap);
 			}
-			Points += 90;
+		
+			
 		}
+
 		if ((sx * sx + sy * sy) <= (sradii * sradii))
 		{
 			removeChild(astroids[i]);
@@ -304,6 +313,7 @@ void MyScene::update(float deltaTime)
 				removeChild(bullets[i]);
 				delete bullets[i]; // delete from the heap first
 				bullets.erase(bullets.begin() + i); // then, remove from the list
+				Points += 30;
 			}
 		}
 
@@ -312,7 +322,7 @@ void MyScene::update(float deltaTime)
 			delete astroidp[i]; // delete from the heap first
 			astroidp.erase(astroidp.begin() + i); // then, remove from the list
 			removeAstroidp = false;
-			Points += 30;
+			
 		}
 		if ((sx * sx + sy * sy) <= (sradii * sradii))
 		{
