@@ -213,19 +213,13 @@ void MyScene::update(float deltaTime)
 			
 
 		}
-		if (removeAstroid == true)
-		{
-			removeChild(astroids[i]);
-			delete astroids[i]; // delete from the heap first
-			astroids.erase(astroids.begin() + i); // then, remove from the list
-			removeAstroid = false;
-		}
-		if ( astroids[i]->position.y > SHEIGHT) {
+	
+		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroids[i]->position.y > SHEIGHT || removeAstroid == true) {
 
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
-			
+			removeAstroid = false;
 		}
 		
 	}
