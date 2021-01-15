@@ -141,7 +141,7 @@ void MyScene::update(float deltaTime)
 		if ((dx * dx + dy * dy) <= (radii * radii))
 		{
 			ufoHealth -= 100;
-			Points += 25;
+			Points += 10;
 		}
 	}
 
@@ -209,7 +209,7 @@ void MyScene::update(float deltaTime)
 			}
 		}
 
-		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroids[i]->position.y > SHEIGHT || removeAstroid == true) {
+		if (astroids[i]->position.y > SHEIGHT || removeAstroid == true) {
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
@@ -226,6 +226,14 @@ void MyScene::update(float deltaTime)
 				addChild(ap);
 				astroidp.push_back(ap);
 			}
+			Points += 90;
+		}
+		if ((sx * sx + sy * sy) <= (sradii * sradii))
+		{
+			removeChild(astroids[i]);
+			delete astroids[i]; // delete from the heap first
+			astroids.erase(astroids.begin() + i); // then, remove from the list
+			spaceshipHealth -= 200;
 		}
 	}
 
@@ -282,7 +290,7 @@ void MyScene::update(float deltaTime)
 		for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
 			float aa = am - bullets[i]->position.x;
 			float bb = bm - bullets[i]->position.y;
-			float radii = bullets[i]->position.z + 15;
+			float radii = bullets[i]->position.z + 20;
 			if ((aa * aa + bb * bb) <= (radii * radii))
 			{
 				removeAstroidp = true;
@@ -292,11 +300,19 @@ void MyScene::update(float deltaTime)
 			}
 		}
 
-		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroidp[i]->position.y > SHEIGHT || removeAstroidp == true) {
+		if (astroidp[i]->position.y > SHEIGHT || removeAstroidp == true) {
 			removeChild(astroidp[i]);
 			delete astroidp[i]; // delete from the heap first
 			astroidp.erase(astroidp.begin() + i); // then, remove from the list
 			removeAstroidp = false;
+			Points += 30;
+		}
+		if ((sx * sx + sy * sy) <= (sradii * sradii))
+		{
+			removeChild(astroidp[i]);
+			delete astroidp[i]; // delete from the heap first
+			astroidp.erase(astroidp.begin() + i); // then, remove from the list
+			spaceshipHealth -= 25;
 		}
 	}
 }
