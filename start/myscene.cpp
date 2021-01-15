@@ -25,6 +25,8 @@ bool actShield;
 int astroidpCount = 0;
 float astrPosx;
 float astrPosy;
+
+bool removeAstroid;
 RGBAColor colors[10] = { WHITE, GRAY, RED, ORANGE, YELLOW, GREEN, CYAN, BLUE, PINK, MAGENTA };
 
 MyScene::MyScene() : MainMenu()
@@ -189,44 +191,43 @@ void MyScene::update(float deltaTime)
 
 
 	for (int i = astroids.size() - 1; i >= 0; i--) { // backwards!!!
+		float am = astroids[i]->position.x;
+		float bm = astroids[i]->position.y;
 		float dx = astroids[i]->position.x - bulletx;
 		float dy = astroids[i]->position.y - bullety;
 		float radii = astroids[i]->position.z + 62;
 		float sx = astroids[i]->position.x - spaceship->position.x;
 		float sy = astroids[i]->position.y - spaceship->position.y;
 		float sradii = astroids[i]->position.z + 62;
-		if ((sx * sx + sy * sy) <= (sradii * sradii) || astroids[i]->position.y > SHEIGHT) {
-
-			removeChild(astroids[i]);
-			delete astroids[i]; // delete from the heap first
-			astroids.erase(astroids.begin() + i); // then, remove from the list
-			
-		}
-		if ((dx * dx + dy * dy) <= (radii * radii)) {
-			astrPosx = astroids[i]->position.x;
-			astrPosy = astroids[i]->position.y;
-			
-			spaceshipHealth -= 125;
-			astroidpCount + 4;
-
-			for (int i = 0; i < 4; i++)
+		for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
+			float aa = am - bullets[i]->position.x;
+			float bb = bm - bullets[i]->position.y;
+			float radii = bullets[i]->position.z + UfoR;
+			if ((aa * aa + bb * bb) <= (radii * radii))
 			{
-				astroidParts* ap = new astroidParts();
-
-				//ap->position.x = (rand() % SWIDTH);
-				//ap->position.y = (rand() % SHEIGHT);
-				ap->position.x = (astrPosx + (rand() % 100));
-				ap->position.y = (astrPosy + (rand() % 100));
-				ap->rotation.z = (rand() % 12);
-
-				//s->rotation = 1 + (rand() % 3);
-				addChild(ap);
-				astroidp.push_back(ap);
+				removeAstroid = true;
+				removeChild(bullets[i]);
+				delete bullets[i]; // delete from the heap first
+				bullets.erase(bullets.begin() + i); // then, remove from the list
 			}
+			
+
+		}
+		if (removeAstroid == true)
+		{
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
+			removeAstroid = false;
 		}
+		if ( astroids[i]->position.y > SHEIGHT) {
+
+			removeChild(astroids[i]);
+			delete astroids[i]; // delete from the heap first
+			astroids.erase(astroids.begin() + i); // then, remove from the list
+			
+		}
+		
 	}
 
 

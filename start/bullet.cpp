@@ -45,8 +45,5 @@ void Bullet::update(float deltaTime)
 	this->line()->color = GREEN;
 	this->position.y += this->Velocity.y;
 	this->position.x += this->Velocity.x;
-
-	bulletx = this->position.x;
-	bullety = this->position.y;
 	
 }
