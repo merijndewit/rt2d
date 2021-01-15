@@ -17,11 +17,15 @@ float timerCurrent = 0.0f;
 float timerTotal = 0.25f;
 float astroidTimer = 0.0f;
 float astroidTotal = 12;
+float ufotimer = 0.0f;
+float ufoTotal = 1;
 int spaceshipHealth = 10000;
 int Points = 0;
 int shieldTimer = 0;
 int astroidCount = 5;
+int ufoTimer = 0;
 bool actShield;
+bool addUfo;
 int astroidpCount = 0;
 float astrPosx;
 float astrPosy;
@@ -84,13 +88,14 @@ void MyScene::update(float deltaTime)
 {
 	timerCurrent += deltaTime;
 	astroidTimer += deltaTime;
+	ufotimer += deltaTime;
 	MainMenu::update(deltaTime);
 
 	if (input()->getKeyUp(KeyCode::Escape)) {
 		this->stop();
 	}
 
-	if (input()->getKeyUp(KeyCode::Space)) {
+	if (input()->getKey(KeyCode::Space)) {
 		Bullet* b = new Bullet();
 		b->position = spaceship->position;
 		b->rotation = spaceship->rotation;
@@ -102,7 +107,7 @@ void MyScene::update(float deltaTime)
 		b->Velocity.x = Force.x * 6;
 	}
 
-	if (timerCurrent >= timerTotal) {
+	if (timerCurrent >= timerTotal && ufoHealth >= 0) {
 		enemyBullet* b = new enemyBullet();
 		b->position = ufo->position;
 
@@ -114,19 +119,21 @@ void MyScene::update(float deltaTime)
 		float y1 = spaceship->position.y - ufo->position.y;
 		float rotation = atan2(y1, x1);
 		b->rotation.z = rotation;
-		std::cout << "-";
 		Vector2 Force = Vector2(cos(rotation), sin(rotation));
 		b->Velocity.y = Force.y * 5;
 		b->Velocity.x = Force.x * 5;
 		b->rotation.z = rotation;
 		timerCurrent -= timerTotal;
-		shieldTimer -= 1;
 	}
 
 	if (astroidTimer >= astroidTotal) {
 		astroidTimer -= astroidTotal;
 		astroidCount++;
-		std::cout << astroidCount;
+	}
+	if (ufotimer >= ufoTotal) {
+		ufotimer -= ufoTotal;
+		ufoTimer -= 1;
+		shieldTimer -= 1;
 	}
 
 	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
@@ -314,5 +321,19 @@ void MyScene::update(float deltaTime)
 			astroidp.erase(astroidp.begin() + i); // then, remove from the list
 			spaceshipHealth -= 25;
 		}
+	}
+	if (ufoHealth <= 0 && addUfo == false)
+	{
+		removeChild(ufo);
+		ufoTimer = 30;
+		addUfo = true;
+	}
+
+	if ((ufoTimer <= 0) && (addUfo == true))
+	{
+		timerCurrent = 0;
+		addUfo = false;
+		ufoHealth = 10000;
+		addChild(ufo);
 	}
 }
