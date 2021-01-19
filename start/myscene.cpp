@@ -36,7 +36,6 @@ int bulletsshot = 0;
 int astroidsdestroid = 0;
 int miniastroidsdestroid = 0;
 
-
 bool removeAstroid;
 bool removeAstroidp;
 
@@ -144,19 +143,17 @@ void MyScene::update(float deltaTime)
 		{
 			timerTotal = timerTotal * 0.95;
 		}
-		
 	}
 	if (ufotimer >= ufoTotal) {
 		ufotimer -= ufoTotal;
 		ufoTimer -= 1;
-		
 	}
 
 	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
 		float dx = bullets[i]->position.x - ufo->position.x;
 		float dy = bullets[i]->position.y - ufo->position.y;
 		float radii = bullets[i]->position.z + UfoR;
-		if (bullets[i]->position.y > SHEIGHT || bullets[i]->position.y < 0 || bullets[i]->position.x < 0 || bullets[i]->position.x > SWIDTH || (dx * dx + dy * dy) <= (radii * radii)) {
+		if (bullets[i] && bullets[i]->position.y > SHEIGHT || bullets[i]->position.y < 0 || bullets[i]->position.x < 0 || bullets[i]->position.x > SWIDTH || (dx * dx + dy * dy) <= (radii * radii)) {
 			removeChild(bullets[i]);
 			delete bullets[i]; // delete from the heap first
 			bullets.erase(bullets.begin() + i); // then, remove from the list
@@ -174,7 +171,7 @@ void MyScene::update(float deltaTime)
 		float dy = enemyB[i]->position.y - spaceship->position.y;
 		float radii = enemyB[i]->position.z + UfoR;
 
-		if (enemyB[i]->position.y > SHEIGHT || enemyB[i]->position.y < 0 || enemyB[i]->position.x < 0 || enemyB[i]->position.x > SWIDTH || (dx * dx + dy * dy) <= (radii * radii)) {
+		if (enemyB[i] && enemyB[i]->position.y > SHEIGHT || enemyB[i]->position.y < 0 || enemyB[i]->position.x < 0 || enemyB[i]->position.x > SWIDTH || (dx * dx + dy * dy) <= (radii * radii)) {
 			removeChild(enemyB[i]);
 			delete enemyB[i]; // delete from the heap first
 			enemyB.erase(enemyB.begin() + i); // then, remove from the list
@@ -224,7 +221,7 @@ void MyScene::update(float deltaTime)
 			float aa = am - bullets[i]->position.x;
 			float bb = bm - bullets[i]->position.y;
 			float radii = bullets[i]->position.z + UfoR;
-			if ((aa * aa + bb * bb) <= (radii * radii))
+			if (bullets[i] && (aa * aa + bb * bb) <= (radii * radii))
 			{
 				removeAstroid = true;
 				removeChild(bullets[i]);
@@ -235,7 +232,7 @@ void MyScene::update(float deltaTime)
 			}
 		}
 
-		if (astroids[i]->position.y > SHEIGHT || removeAstroid == true) {
+		if (astroids[i] && astroids[i]->position.y > SHEIGHT || removeAstroid == true) {
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
@@ -252,11 +249,9 @@ void MyScene::update(float deltaTime)
 				addChild(ap);
 				astroidp.push_back(ap);
 			}
-		
-			
 		}
 
-		if ((sx * sx + sy * sy) <= (sradii * sradii))
+		if (astroids[i] && (sx * sx + sy * sy) <= (sradii * sradii))
 		{
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
@@ -276,7 +271,6 @@ void MyScene::update(float deltaTime)
 	{
 		this->removeChild(shield);
 		actShield = false;
-		
 	}
 
 	std::stringstream ufotxt;
@@ -337,14 +331,14 @@ void MyScene::update(float deltaTime)
 			delete astroidp[i]; // delete from the heap first
 			astroidp.erase(astroidp.begin() + i); // then, remove from the list
 			removeAstroidp = false;
-			
 		}
-		if ((sx * sx + sy * sy) <= (sradii * sradii))
+		else if ((sx * sx + sy * sy) <= (sradii * sradii))
 		{
 			removeChild(astroidp[i]);
 			delete astroidp[i]; // delete from the heap first
 			astroidp.erase(astroidp.begin() + i); // then, remove from the list
 			spaceshipHealth -= 25;
+			removeAstroidp = false;
 		}
 	}
 	if (ufoHealth <= 0 && addUfo == false)
