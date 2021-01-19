@@ -272,7 +272,7 @@ void MyScene::update(float deltaTime)
 		actShield = true;
 		shieldused++;
 	}
-	else if (shield && shieldTimer == 0)
+	else if (shield && shieldTimer <= 0)
 	{
 		this->removeChild(shield);
 		actShield = false;
