@@ -59,6 +59,7 @@ GameOver::GameOver() : MainMenu()
 	s1.addPoint(0, 0);
 	square1->addLine(&s1);
 	this->addChild(square1);
+	square1->scale = Point2(0, 0);
 }
 
 GameOver::~GameOver()
@@ -71,7 +72,10 @@ void GameOver::update(float deltaTime)
 	text[0]->message("Back", WHITE);
 
 	Rectangle rect1 = Rectangle(square1->position.x, square1->position.y, 256, 128);
-
+	if (square1->scale.x <= 1)
+	{
+		square1->scale += Point2(0.02, 0.02);
+	}
 	//get mouse position
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;

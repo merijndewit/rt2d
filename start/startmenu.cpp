@@ -33,6 +33,7 @@ startMenu::startMenu() : MainMenu()
 	s1.addPoint(0, 0);
 	square1->addLine(&s1);
 	this->addChild(square1);
+	square1->scale = Point2(0.0f, 0.0f);
 
 	square2 = new Box();
 	square2->position = Point2(SWIDTH / 2 - (256 / 2), 350);
@@ -45,6 +46,7 @@ startMenu::startMenu() : MainMenu()
 	square2->addLine(&s2);
 	this->addChild(square2);
 	clickCounter = 0;
+	
 	
 }
 
@@ -59,6 +61,11 @@ void startMenu::update(float deltaTime)
 
 	Rectangle rect1 = Rectangle(square1->position.x, square1->position.y, 256, 128);
 	Rectangle rect2 = Rectangle(square2->position.x, square2->position.y, 256, 64);
+	square2->scale = square1->scale;
+	if (square1->scale.x <= 1)
+	{
+		square1->scale += Point2(0.02, 0.02);
+	}
 
 	//get mouse position
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
