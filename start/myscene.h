@@ -24,6 +24,10 @@ extern int astroidsdestroid;
 extern int miniastroidsdestroid;
 extern int Points;
 
+extern int spaceshipHealth;
+extern float timerTotal;
+extern float astroidTotal;
+
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public MainMenu
 {

@@ -16,10 +16,10 @@
 float timerCurrent = 0;
 float timerTotal;
 float astroidTimer = 0.0f;
-float astroidTotal = 12;
+float astroidTotal;
 float ufotimer = 0.0f;
 float ufoTotal = 1;
-int spaceshipHealth = 2000;
+int spaceshipHealth;
 int Points = 0;
 int shieldTimer = 0;
 int astroidCount = 5;
@@ -80,7 +80,7 @@ MyScene::MyScene() : MainMenu()
 	line3->scale = Point2(0.5f, 0.5f);
 	line3->position.x = SWIDTH / 2;
 	line3->position.y = 30;
-	timerTotal = 2;
+	Points = 0;
 }
 
 MyScene::~MyScene()

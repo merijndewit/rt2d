@@ -8,7 +8,8 @@
 #include <sstream>
 #include <vector>
 #include "spaceship.h"
-#include "myscene.h"
+//#include "myscene.h"
+#include "startmenu.h"
 
 float spacex;
 float spacey;
@@ -53,8 +54,14 @@ SpaceShip::~SpaceShip()
 
 void SpaceShip::update(float deltaTime)
 {
+	if (controlAssist == true)
+	{
+		Acceleration->x = Acceleration->x * 0.99;
+		Acceleration->y = Acceleration->y * 0.99;
+	}
 	this->position.x += this->Acceleration->x;
 	this->position.y += this->Acceleration->y;
+	
 	this->position.x += Velocity->x;
 	this->position.y += Velocity->y;
 	

@@ -3,6 +3,9 @@
 
 #include <rt2d/timer.h>
 #include "mainmenu.h"
+#include "myscene.h"
+
+extern bool controlAssist;
 
 class startMenu : public MainMenu
 {

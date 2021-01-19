@@ -2,7 +2,9 @@
 #include <sstream>
 #include "startmenu.h"
 #include "collider.h"
+#include "myscene.h"
 int clickCounter;
+bool controlAssist;
 
 startMenu::startMenu() : MainMenu()
 {
@@ -87,10 +89,18 @@ void startMenu::update(float deltaTime)
 	if (clickCounter == 0)
 	{
 		ditxt << "Easy", GREEN;
+		controlAssist = true;
+		spaceshipHealth = 10000;
+		timerTotal = 3;
+		astroidTotal = 15;
 	}
 	else if (clickCounter == 1)
 	{
 		ditxt << "Hard", RED;
+		controlAssist = false;
+		spaceshipHealth = 8000;
+		timerTotal = 1.5;
+		astroidTotal = 11;
 	}
 
 	text2[0]->message(ditxt.str());
