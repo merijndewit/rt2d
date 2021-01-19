@@ -19,7 +19,7 @@ float astroidTimer = 0.0f;
 float astroidTotal = 12;
 float ufotimer = 0.0f;
 float ufoTotal = 1;
-int spaceshipHealth = 1000;
+int spaceshipHealth = 2000;
 int Points = 0;
 int shieldTimer = 0;
 int astroidCount = 5;
@@ -133,6 +133,8 @@ void MyScene::update(float deltaTime)
 		b->Velocity.x = Force.x * 5;
 		b->rotation.z = rotation;
 		timerCurrent -= timerTotal;
+		shieldTimer -= 3;
+		std::cout << shieldTimer;
 	}
 
 	if (astroidTimer >= astroidTotal) {
@@ -142,12 +144,12 @@ void MyScene::update(float deltaTime)
 		{
 			timerTotal = timerTotal * 0.95;
 		}
-
+		
 	}
 	if (ufotimer >= ufoTotal) {
 		ufotimer -= ufoTotal;
 		ufoTimer -= 1;
-		shieldTimer -= 1;
+		
 	}
 
 	for (int i = bullets.size() - 1; i >= 0; i--) { // backwards!!!
@@ -266,7 +268,7 @@ void MyScene::update(float deltaTime)
 	if (input()->getKeyDown(KeyCode::Q) && shieldTimer <= -60)
 	{
 		this->addChild(shield);
-		shieldTimer = 18;
+		shieldTimer = 25;
 		actShield = true;
 		shieldused++;
 	}
