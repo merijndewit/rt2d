@@ -16,6 +16,14 @@
 
 extern float astrPosx;
 extern float astrPosy;
+
+extern int ufohits;
+extern int shieldused;
+extern int bulletsshot;
+extern int astroidsdestroid;
+extern int miniastroidsdestroid;
+extern int Points;
+
 /// @brief The MyScene class is the Scene implementation.
 class MyScene : public MainMenu
 {

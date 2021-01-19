@@ -30,6 +30,13 @@ int astroidpCount = 0;
 float astrPosx;
 float astrPosy;
 
+int ufohits = 0;
+int shieldused = 0;
+int bulletsshot = 0;
+int astroidsdestroid = 0;
+int miniastroidsdestroid = 0;
+
+
 bool removeAstroid;
 bool removeAstroidp;
 
@@ -106,6 +113,7 @@ void MyScene::update(float deltaTime)
 		Vector2 Force = Vector2(cos(spacer), sin(spacer));
 		b->Velocity.y = Force.y * 6;
 		b->Velocity.x = Force.x * 6;
+		bulletsshot++;
 	}
 
 	if (timerCurrent >= timerTotal && ufoHealth >= 0) {
@@ -155,6 +163,7 @@ void MyScene::update(float deltaTime)
 		{
 			ufoHealth -= 100;
 			Points += 10;
+			ufohits++;
 		}
 	}
 
@@ -220,6 +229,7 @@ void MyScene::update(float deltaTime)
 				delete bullets[i]; // delete from the heap first
 				bullets.erase(bullets.begin() + i); // then, remove from the list
 				Points += 90;
+				astroidsdestroid++;
 			}
 		}
 
@@ -258,11 +268,13 @@ void MyScene::update(float deltaTime)
 		this->addChild(shield);
 		shieldTimer = 18;
 		actShield = true;
+		shieldused++;
 	}
 	else if (shield && shieldTimer == 0)
 	{
 		this->removeChild(shield);
 		actShield = false;
+		
 	}
 
 	std::stringstream ufotxt;
@@ -314,6 +326,7 @@ void MyScene::update(float deltaTime)
 				delete bullets[i]; // delete from the heap first
 				bullets.erase(bullets.begin() + i); // then, remove from the list
 				Points += 30;
+				miniastroidsdestroid++;
 			}
 		}
 
