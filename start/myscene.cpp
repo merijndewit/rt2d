@@ -19,7 +19,7 @@ float astroidTimer = 0.0f;
 float astroidTotal = 12;
 float ufotimer = 0.0f;
 float ufoTotal = 1;
-int spaceshipHealth = 10000;
+int spaceshipHealth = 1000;
 int Points = 0;
 int shieldTimer = 0;
 int astroidCount = 5;
@@ -345,5 +345,10 @@ void MyScene::update(float deltaTime)
 		addUfo = false;
 		ufoHealth = 10000;
 		addChild(ufo);
+	}
+
+	if (spaceshipHealth <= 0)
+	{
+		activescene++;
 	}
 }

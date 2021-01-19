@@ -179,6 +179,8 @@ IF(MAKE_START)
 		start/box.h
 		start/astroidparts.cpp
 		start/astroidparts.h
+		start/gameover.cpp
+		start/gameover.h
 		
 	)
 	target_link_libraries(start

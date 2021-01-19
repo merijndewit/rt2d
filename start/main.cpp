@@ -2,6 +2,7 @@
 
 #include "startmenu.h"
 #include "myscene.h"
+#include "gameover.h"
 
 int main(void)
 {
@@ -10,6 +11,7 @@ int main(void)
 	std::vector<MainMenu*> scenes;
 	scenes.push_back(new startMenu());
 	scenes.push_back(new MyScene());
+	scenes.push_back(new GameOver());
 	int s = scenes.size();
 
 	MainMenu* scene = scenes[0];
