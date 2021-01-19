@@ -33,7 +33,7 @@ public:
 	Background* background;
 
 private:
-
+	bool star;
 };
 
 #endif /* BACKGROUND_H */

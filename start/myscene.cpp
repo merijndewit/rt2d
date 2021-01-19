@@ -29,6 +29,7 @@ bool addUfo;
 int astroidpCount = 0;
 float astrPosx;
 float astrPosy;
+int starCounter;
 
 int ufohits = 0;
 int shieldused = 0;
@@ -182,16 +183,28 @@ void MyScene::update(float deltaTime)
 		}
 	}
 
-	for (int i = stars.size() - 1; i < 100; i++)
+	starCounter++;
+
+	if (starCounter == 10)
 	{
 		Background* s = new Background();
 		s->position.x = 1 + (rand() % SWIDTH);
 		s->position.y = 1 + (rand() % SHEIGHT);
 		s->rotation.z = 1 + (rand() % 12);
-
 		//s->rotation = 1 + (rand() % 3);
+	
 		addChild(s);
 		stars.push_back(s);
+		starCounter = 0;
+	}
+
+	for (int i = stars.size() - 1; i >= 0; i--) { // backwards!!!
+		if (stars[i]->scale.x <= 0) {
+			removeChild(stars[i]);
+			delete stars[i]; // delete from the heap first
+			stars.erase(stars.begin() + i); // then, remove from the list
+			//std::cout << "meow";
+		}
 	}
 
 	for (int i = astroids.size() - 1; i < astroidCount; i++)
