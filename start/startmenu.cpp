@@ -15,14 +15,14 @@ startMenu::startMenu() : MainMenu()
 	this->addChild(line1);
 
 	line1->scale = Point2(0.5f, 0.5f);
-	line1->position = Point2(SWIDTH / 2 - 30, 260);
+	line1->position = Point2(0, 260);
 
 	Text* line2 = new Text();
 	text2.push_back(line2);
 	this->addChild(line2);
 
 	line2->scale = Point2(0.5f, 0.5f);
-	line2->position = Point2(SWIDTH / 2 - 30, 382);
+	line2->position = Point2(0, 382);
 
 	square1 = new Box();
 	square1->position = Point2(SWIDTH/2 - (256/2), 200);
@@ -64,13 +64,13 @@ void startMenu::update(float deltaTime)
 	Rectangle rect2 = Rectangle(square2->position.x, square2->position.y, 256, 64);
 	square2->scale = square1->scale;
 
-		
-		if (square1->scale.x <= 1)
-		{
-			square1->scale.x += linear(timer, 0, 2, 1000);
-			square1->scale.y += linear(timer, 0, 2, 1000);
-			timer++;
-		}
+		square1->scale.x = linear(timer, 0, 1, 200);
+		square1->scale.y = linear(timer, 0, 1, 200);
+
+		text[0]->position.x = linear(timer, 0, (SWIDTH / 2) - 28, 200);
+		text2[0]->position.x = text[0]->position.x;
+		timer++;
+	
 	
 	//get mouse position
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
