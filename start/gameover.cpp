@@ -95,11 +95,11 @@ void GameOver::update(float deltaTime)
 	text2[0]->message(pointstxt.str(), PINK);
 
 	std::stringstream atxt;
-	atxt << "Astroids Destroid: " << astroidsdestroid;
+	atxt << "Astroids Destroyed: " << astroidsdestroid;
 	text3[0]->message(atxt.str(), PINK);
 
 	std::stringstream mtxt;
-	mtxt << "Miniastroids Destroid: " << miniastroidsdestroid;
+	mtxt << "Miniastroids Destroyed: " << miniastroidsdestroid;
 	text4[0]->message(mtxt.str(), PINK);
 
 	std::stringstream btxt;
