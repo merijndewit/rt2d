@@ -269,8 +269,13 @@ void MyScene::update(float deltaTime)
 			removeChild(astroids[i]);
 			delete astroids[i]; // delete from the heap first
 			astroids.erase(astroids.begin() + i); // then, remove from the list
-			spaceshipHealth -= 200;
+			
+			if (actShield == false)
+			{
+				spaceshipHealth -= 200;
+			}
 		}
+	
 	}
 
 	if (input()->getKeyDown(KeyCode::Q) && shieldTimer <= -60)
@@ -350,9 +355,16 @@ void MyScene::update(float deltaTime)
 			removeChild(astroidp[i]);
 			delete astroidp[i]; // delete from the heap first
 			astroidp.erase(astroidp.begin() + i); // then, remove from the list
-			spaceshipHealth -= 25;
+			
 			removeAstroidp = false;
+
+			if (actShield == false)
+			{
+				spaceshipHealth -= 25;
+			}
 		}
+	
+
 	}
 	if (ufoHealth <= 0 && addUfo == false)
 	{
