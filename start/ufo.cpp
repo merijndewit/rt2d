@@ -17,7 +17,7 @@ float UfoR;
 
 int ufoHealth;
 
-
+bool pos;
 
 Ufo::Ufo() : Entity()
 {
@@ -30,7 +30,7 @@ Ufo::Ufo() : Entity()
 	tmp->addPoint(-10, 12);
 	tmp->addPoint(10, 12);
 	tmp->addPoint(15, 10);
-	tmp->addPoint(35 ,10);
+	tmp->addPoint(35, 10);
 	tmp->addPoint(40, 5);
 	tmp->addPoint(40, -5);
 	tmp->addPoint(35, -10);
@@ -52,7 +52,7 @@ Ufo::Ufo() : Entity()
 	tmp->addPoint(-40, -5);
 	tmp->addPoint(-40, 5);
 	tmp->addPoint(-35, 10);
-	
+
 	this->addLine(tmp);
 	delete tmp; // delete when you're done with it.
 	this->position = Point2(160, 90);
@@ -61,29 +61,34 @@ Ufo::Ufo() : Entity()
 	c1.createCircle(45, 18);
 	this->addLine(&c1);
 	*/
+	pos = false;
 }
 
 Ufo::~Ufo()
 {
-
 }
 
 void Ufo::update(float deltaTime)
 {
 	this->line()->color = RED;
 
-	if (spacex <= 280 && spacey <= 160)
-	{
-		this->position = Point2(1100, 650);
-
-	}
-	if (spacex >= 1100 && spacey >= 650)
-	{
-		this->position = Point2(160, 90);
-
-	}
-	
-	
-
 	UfoR = this->Position.z;
+
+	float dx = this->position.x - spacex;
+	float dy = this->position.y - spacey;
+	float radii = 300;
+
+	if ((dx * dx + dy * dy) <= (radii * radii))
+	{
+		if (pos == false)
+		{
+			this->position = Point2(1100, 650);
+			pos = true;
+		}
+		else if (pos == true)
+		{
+			this->position = Point2(100, 100);
+			pos = false;
+		}
+	}
 }
