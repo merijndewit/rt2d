@@ -5,6 +5,7 @@
 #include "myscene.h"
 int clickCounter;
 bool controlAssist;
+float timer;
 
 startMenu::startMenu() : MainMenu()
 {
@@ -62,11 +63,15 @@ void startMenu::update(float deltaTime)
 	Rectangle rect1 = Rectangle(square1->position.x, square1->position.y, 256, 128);
 	Rectangle rect2 = Rectangle(square2->position.x, square2->position.y, 256, 64);
 	square2->scale = square1->scale;
-	if (square1->scale.x <= 1)
-	{
-		square1->scale += Point2(0.02, 0.02);
-	}
 
+		
+		if (square1->scale.x <= 1)
+		{
+			square1->scale.x += linear(timer, 0, 2, 1000);
+			square1->scale.y += linear(timer, 0, 2, 1000);
+			timer++;
+		}
+	
 	//get mouse position
 	int mousex = input()->getMouseX() + camera()->position.x - SWIDTH / 2;
 	int mousey = input()->getMouseY() + camera()->position.y - SHEIGHT / 2;
